@@ -1,52 +1,114 @@
-<section class="py-16 sm:py-20">
-  <h2 class="mb-8 text-center text-3xl font-bold tracking-tight">
-    Featured Revit Models
-  </h2>
-  <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-    <div
-      class="group overflow-hidden rounded-lg bg-background-light shadow-md transition-shadow duration-300 hover:shadow-xl dark:bg-background-dark"
-    >
-      <div
-        class="h-48 w-full bg-cover bg-center"
-        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdokW1oETJ2YJ8XMgDaathzlWKgCdo4xXiBfVa8Tfc2vFaqraO2AtHQGQTSytHjnWmba-BFQ-8vGzZjxizOgKqJWYr1ZPOeQcicE5iPLAqKo1br8qm6cg6FSmGPH3bJQdnDuBBtmpCjZ3zGJ1zPodmCDYnSFvflO9ZsLAR3unxsPaOap5o6oHrs8zI0wRfFfPJeVC2eAnYErt7Q15iScV-1rGXe-TSumvF7B7b7X44HjgBHmVpHF1W0IQLvbgc18YD1TWzPWhoQ_Q");'
-      >
-      </div>
-      <div class="p-6">
-        <h3 class="text-lg font-bold">Residential Building Model</h3>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+<section class="featured">
+  <h2 class="featured-title">Featured Revit Models</h2>
+  <div class="featured-grid">
+    <div class="card">
+      <div class="card-image" style='background-image: url("/edi1.png");'></div>
+      <div class="card-body">
+        <h3 class="card-title">Residential Building Model</h3>
+        <p class="card-text">
           Detailed Revit model of a modern residential building.
         </p>
       </div>
     </div>
-    <div
-      class="group overflow-hidden rounded-lg bg-background-light shadow-md transition-shadow duration-300 hover:shadow-xl dark:bg-background-dark"
-    >
-      <div
-        class="h-48 w-full bg-cover bg-center"
-        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCb6b3zsXiUHVSCXA6Y1uXOmro6zfpNir0Ka8xp-h9pM_YJX7u_bwq0N5OjX76eCysEzPs8diBvDCLX82FqsdVES6shsJOg-w2tydGK7STKD5UlbyxRwKFL0bb6qB6d-g-hDirV57zND7arUWx3bpSIBLHsilz-yzWGygBUJh-JY4HCgUX1UHmmpkIy_clg0ZwBp7L3oXZRtRlQ5mnjVEvnj9Jtf7nZKMwq2F0zXDbAGfyRFvHMuzeE7ScKAq34Gv0XpiUXFtqo1jg");'
-      >
-      </div>
-      <div class="p-6">
-        <h3 class="text-lg font-bold">Commercial Complex Model</h3>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+    <div class="card">
+      <div class="card-image" style='background-image: url("/edi2.png");'></div>
+      <div class="card-body">
+        <h3 class="card-title">Commercial Complex Model</h3>
+        <p class="card-text">
           Comprehensive Revit model of a commercial complex.
         </p>
       </div>
     </div>
-    <div
-      class="group overflow-hidden rounded-lg bg-background-light shadow-md transition-shadow duration-300 hover:shadow-xl dark:bg-background-dark"
-    >
-      <div
-        class="h-48 w-full bg-cover bg-center"
-        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAt0XDilTRVrmjMRdhS_upQ3IzMD3LXQtgdmAKpQ-kikqk6drLbKl4UK3qrRcMY_lpHdnfMP3qllW64QaJ9-qU19fd_zuH952cgjad58r12Sojt-Wv8Zvc8kBJegE8rmULLND4n1GUe1uNs8IaAF3UbUfwqm2LA50B5CypPOzobS6axJvSnUROMHPWrQGxBjo7bHRJBwkT0R015HNI9O415C9usuKRcNoZaFW1TzcxwMikENDJtyuNHGQnxzANTVietWdylNPLnfoE");'
-      >
-      </div>
-      <div class="p-6">
-        <h3 class="text-lg font-bold">Infrastructure Project Model</h3>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+    <div class="card">
+      <div class="card-image" style='background-image: url("/edi3.png");'></div>
+      <div class="card-body">
+        <h3 class="card-title">Infrastructure Project Model</h3>
+        <p class="card-text">
           Revit model of a large-scale infrastructure project.
         </p>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .featured {
+    padding: 4rem 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .featured {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+
+  .featured-title {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.875rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .featured-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .featured-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .card {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: var(--background-light, #ffffff);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  :global(.dark) .card {
+    background-color: var(--background-dark, #0f172a);
+  }
+
+  .card-image {
+    height: 12rem;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .card-text {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: rgb(71, 85, 105);
+  }
+
+  :global(.dark) .card-text {
+    color: rgb(148, 163, 184);
+  }
+</style>

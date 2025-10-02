@@ -1,50 +1,111 @@
-<section class="py-16 sm:py-20">
-  <h2 class="mb-8 text-center text-3xl font-bold tracking-tight">Projects</h2>
-  <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-    <div
-      class="group overflow-hidden rounded-lg bg-background-light shadow-md transition-shadow duration-300 hover:shadow-xl dark:bg-background-dark"
-    >
-      <div
-        class="h-48 w-full bg-cover bg-center"
-        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5Yb5vlAjLW31y49bESMhhhEdpaEJH-jxWJnx85uXVcy8MIBsWof4VPZDnY5v59L10sEIijmMRqLMLKn2YX63LtCOg6L_L4L4CSG9AhTCf_EFDLUqVlsYT4urZ3Z0skZkb0SAQKeWdsQ41wLxHUh9sCWd0L04zW60pFOgaOTytkr6CcJvbPdAff_AEKtyjZkpwpmE20RmTbpUHA8gr6QsIZEtAj8U7KFSWoDww68XAItEwkLMX2_SJsXggJaBr6Ujx-fTfOV5Eh2g");'
-      >
+<section class="projects">
+  <h2 class="projects-title">Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-image" style='background-image: url("/contru1.png");'>
       </div>
-      <div class="p-6">
-        <h3 class="text-lg font-bold">Project Alpha</h3>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-          Description of Project Alpha.
-        </p>
+      <div class="project-body">
+        <h3 class="project-title">Project Alpha</h3>
+        <p class="project-text">Description of Project Alpha.</p>
       </div>
     </div>
-    <div
-      class="group overflow-hidden rounded-lg bg-background-light shadow-md transition-shadow duration-300 hover:shadow-xl dark:bg-background-dark"
-    >
-      <div
-        class="h-48 w-full bg-cover bg-center"
-        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDkW0l4yyTxwB9OFIJimRzHe3HlzE8zrXAGcoPoBS9M8dcpyupO2XZD2URC6gDwODUaDeZWGokrfdnYxmO-wWfNkEiiIrBR5exhoxkrKxYBzgB_IxYUbujzbEtO7bK7E27gjXd2qnH4rtpuOi0ObkxFDM4bsRZSTYXQ--fGH6PWBwllx6iKsKptQXh3EskzfPBpSNc4dI3cXzufweXt7DpdqcFQ7sCq4O3tP7C-8m5X48FJYguLuPkoRsOGXY9rqCWglMIGYDFmAng");'
-      >
+    <div class="project-card">
+      <div class="project-image" style='background-image: url("/contru2.png");'>
       </div>
-      <div class="p-6">
-        <h3 class="text-lg font-bold">Project Beta</h3>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-          Description of Project Beta.
-        </p>
+      <div class="project-body">
+        <h3 class="project-title">Project Beta</h3>
+        <p class="project-text">Description of Project Beta.</p>
       </div>
     </div>
-    <div
-      class="group overflow-hidden rounded-lg bg-background-light shadow-md transition-shadow duration-300 hover:shadow-xl dark:bg-background-dark"
-    >
-      <div
-        class="h-48 w-full bg-cover bg-center"
-        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC7XXzvxhdHGvsZ2Ch6HShe1VaKWEctEmGxawGU97vMFXhKIrLcmjV-sCy6yYv7nMRNmWwJoTiat_hS0YzBHWT0hDhZ-FKTHnz6-lb311zwagGjpu_TkEAqRALmmR_u4qRd8UJMwW_uAqgNfn0Wv1RS4trFnygBg7Amw6Km-3IKvJOjqyi-o1iZdttLRVVi7ZsPpfMBYzMD3dRsYvBhvf4CWSHsLgiW9qt1EEtJjSR31VxuSkWLStg8nlHeZw37EKdtbVqrf5AZyeo");'
-      >
+    <div class="project-card">
+      <div class="project-image" style='background-image: url("/contru3.png");'>
       </div>
-      <div class="p-6">
-        <h3 class="text-lg font-bold">Project Gamma</h3>
-        <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
-          Description of Project Gamma.
-        </p>
+      <div class="project-body">
+        <h3 class="project-title">Project Gamma</h3>
+        <p class="project-text">Description of Project Gamma.</p>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .projects {
+    padding: 4rem 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .projects {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+
+  .projects-title {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.875rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .project-card {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: var(--background-light, #ffffff);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .project-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  :global(.dark) .project-card {
+    background-color: var(--background-dark, #0f172a);
+  }
+
+  .project-image {
+    height: 12rem;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .project-body {
+    padding: 1.5rem;
+  }
+
+  .project-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .project-text {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: rgb(71, 85, 105);
+  }
+
+  :global(.dark) .project-text {
+    color: rgb(148, 163, 184);
+  }
+</style>
