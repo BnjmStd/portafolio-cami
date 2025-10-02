@@ -1,0 +1,57 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "@styles/global.css";
+import Background from "~/components/Background.astro";
+import Header from "~/components/Header.astro";
+import Footer from "~/components/Footer.astro";
+
+interface Props {
+  title: string | undefined;
+}
+const defaultTitle = "Camila Aracena - Ingeniera Civil";
+
+const { title = defaultTitle } = Astro.props;
+
+const websiteTitle = "Camila Aracena - Ingeniera Civil";
+const linkWebsite = "http://camila-aracena.cl";
+const websiteImage = "http://camila-aracena.cl/images/home/menu-2.jpg";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={websiteTitle} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- <meta property="og:title" content="MathBio Lab" />
+    <meta
+      property="og:description"
+      content="Grupo de investigación en modelado matemático y biología."
+    />
+    <meta property="og:image" content={websiteImage} />
+    <meta property="og:url" content={linkWebsite} />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MathBio Lab" />
+    <meta name="twitter:description" content={defaultTitle} />
+    <meta name="twitter:image" content={websiteImage} /> -->
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+  </head>
+
+  <body class="min-h-screen overflow-x-hidden">
+    <ClientRouter />
+    <Background />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<script></script>
