@@ -3,153 +3,177 @@ import Layout from "~/layouts/Layout.astro";
 ---
 
 <Layout title="Models">
-  <main class="flex-grow">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-      <div class="text-center mb-12">
-        <h2
-          class="text-4xl md:text-5xl font-extrabold tracking-tighter text-slate-900 dark:text-white"
-        >
-          Revit Model Gallery
-        </h2>
-        <p
-          class="mt-4 max-w-2xl mx-auto text-lg text-slate-600 dark:text-slate-400"
-        >
-          Explore a collection of detailed 3D models created with Revit,
-          showcasing a range of architectural and structural designs.
-        </p>
+  <div class="container">
+    <div class="header">
+      <h2>Revit Model Gallery</h2>
+      <p>
+        Explore a collection of detailed 3D models created with Revit,
+        showcasing a range of architectural and structural designs.
+      </p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="card-bg" style="background-image:url('/models/model1.png')">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Residential House Model</h3>
+          <p>
+            A detailed model of a modern residential house, showcasing
+            architectural design and structural elements.
+          </p>
+        </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div
-          class="group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl"
-        >
-          <div
-            class="absolute inset-0 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-cxKB7JWGo3YvEjk61dqaKO1c7m8lC2USG1psn0GD9a6Jg41KCUx4pa4_goUggu729AFQzd0eKBmWV8FtC_R82GQkG5M1QGbtQNB-ii3ygIY7NthG7w4PvwcNIc0woqksdIsWrbvQRveiu4NIaowy169l_tivKPPaeOlxKS_r4A3SVHDE16P8CVLQzWYSzuXOMtJvJ21-3p9LAivPAxX5rko6CzRGybjkI83KkTzUOkLbHpf0Oy6fR9ZjH23x4UYG_bVjO0ZuC94");'
-          >
-          </div>
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-          >
-          </div>
-          <div class="relative p-6 flex flex-col justify-end h-96">
-            <h3 class="text-xl font-bold text-white">
-              Residential House Model
-            </h3>
-            <p class="mt-2 text-sm text-slate-200">
-              A detailed model of a modern residential house, showcasing
-              architectural design and structural elements.
-            </p>
-          </div>
+
+      <div class="card">
+        <div class="card-bg" style="background-image:url('/models/model2.png')">
         </div>
-        <div
-          class="group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl"
-        >
-          <div
-            class="absolute inset-0 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDIQWYiYGrT51pZgmeh4KCU3oygEWaxvjqXhsGLwwCL7E498YfUzmRDfsyS1SyrVsXibuPbdAVE8sOquRJiyiWFpM9foIOSHM1Srn0c6dIzbVJ3e8vcMbB2lzGFJ9i3PeoSzOxTLap1cnZnPdH3YfAYh_wj38VF5gLwI0AX_VkRd50IGNBNsrehx8yBsD1er34kaXce-jRlpUgZzf80kZxaqVl0KJRWonzdBGXaORK6iFwUnRC6DbmaY08qRnV6hQjJAcKokF7ww7w");'
-          >
-          </div>
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-          >
-          </div>
-          <div class="relative p-6 flex flex-col justify-end h-96">
-            <h3 class="text-xl font-bold text-white">
-              Commercial Building Model
-            </h3>
-            <p class="mt-2 text-sm text-slate-200">
-              A comprehensive model of a commercial building, including interior
-              layouts and exterior features.
-            </p>
-          </div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Commercial Building Model</h3>
+          <p>
+            A comprehensive model of a commercial building, including interior
+            layouts and exterior features.
+          </p>
         </div>
-        <div
-          class="group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl"
-        >
-          <div
-            class="absolute inset-0 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDwGIhd1WmpsZYYucYET_BsJC_IxVFU5E7rjuUme_69H9bb9FrgZDckNLhJ52NzC2h_3qsPtmPGQjLfDxUEGOfFxaZTqw-FAiqmPQx1YTNrPNcnBESlwcXjwrE7I_arQIlfGlIi48xU4tDDvoW-VyD-rsjfq8csIzXDnFQFg9x4DJlambqEzUpOuioDKf4btpjqG48EKB75sAKO77ge1YLXGL1qYXHlwot7k8_-C-jn0cSoC2VFePuCtw9eUUDDfBDFhG9jNMKhzHs");'
-          >
-          </div>
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-          >
-          </div>
-          <div class="relative p-6 flex flex-col justify-end h-96">
-            <h3 class="text-xl font-bold text-white">
-              Infrastructure Project Model
-            </h3>
-            <p class="mt-2 text-sm text-slate-200">
-              An infrastructure project model, focusing on civil engineering
-              aspects such as road networks and utilities.
-            </p>
-          </div>
+      </div>
+
+      <div class="card">
+        <div class="card-bg" style="background-image:url('/models/model3.png')">
         </div>
-        <div
-          class="group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl"
-        >
-          <div
-            class="absolute inset-0 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDim0lef36EjeE69DzJl7epQkSkn_eW78molQfOkaiWKxRVgvmZymWh_vMb-XiTJmaYtERbIhDp0Lubbij_zsVi511vQMKAq7kFve3m45iBuzyj89BKQPmhaQwQgo2JOqmgYfA8yOD-8WYsdijZ59ViuO353qnnQehTlqyRSKsQdBaF4MTC3dtDnowwoGVqv-j89s1IBuwccWJks2PZuoGhSl-wcEla65xK3jAUP5kAtuMaGW9Xv87ZyEnHwaXcq1RQQETHHLZ5J0E");'
-          >
-          </div>
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-          >
-          </div>
-          <div class="relative p-6 flex flex-col justify-end h-96">
-            <h3 class="text-xl font-bold text-white">
-              Sustainable Design Model
-            </h3>
-            <p class="mt-2 text-sm text-slate-200">
-              A model emphasizing sustainable design principles, incorporating
-              energy-efficient features and green materials.
-            </p>
-          </div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Infrastructure Project Model</h3>
+          <p>
+            An infrastructure project model, focusing on civil engineering
+            aspects such as road networks and utilities.
+          </p>
         </div>
-        <div
-          class="group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl"
-        >
-          <div
-            class="absolute inset-0 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDf3sAumD4i7IQruWAlX1rhtH8m6las7DNLII0LtXf6BrhsSR9uYQ1DpwN5-5EyCgTE1R1uTFu3cjumzwoSwTKxjCl787b58EaZNtMX68ycnLhlvPCIK9wshOjWVKdr8SiFoRSlx4XZ8mR4kSatkPopF8INgIA7YMDaAzMvGCt6vOIh0EGFjwgKBAkm1MylPd11UnOy0ftKWxJs4xNuXp1zKtg3vj4fAO4htUyfTYHBjlvppc_kyZjmqUQlVzevQlnKXJaXktCSNNY");'
-          >
-          </div>
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-          >
-          </div>
-          <div class="relative p-6 flex flex-col justify-end h-96">
-            <h3 class="text-xl font-bold text-white">
-              Renovation Project Model
-            </h3>
-            <p class="mt-2 text-sm text-slate-200">
-              A renovation project model, illustrating the transformation of an
-              existing structure with updated designs.
-            </p>
-          </div>
+      </div>
+
+      <div class="card">
+        <div class="card-bg" style="background-image:url('/models/model4.png')">
         </div>
-        <div
-          class="group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl"
-        >
-          <div
-            class="absolute inset-0 bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-105"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDy1RAnrVbqXhR3xSFYHdGeSzfFn7y7XlZnAxyPxxdU2EVJhDhEK6B53V-4o6pyAgJUF7s1169lXHARG04ntummJ6JGuq8gyGgh55qMx_R-3hFGK5RoUQaijos3tMQ2FFi-igBH7rvNhkIvXUihylsdgbjI70IKm-bssT3g37xS1ascOBftIZs0TcnNVDxfTVS6dcXs2lb3BaPw-oPYSXTaNMV4o1xvyWS5W5W_y5hFHSSESHu-Ea6sTatwFRfytzyyPuuNoKgI_MI");'
-          >
-          </div>
-          <div
-            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
-          >
-          </div>
-          <div class="relative p-6 flex flex-col justify-end h-96">
-            <h3 class="text-xl font-bold text-white">Urban Planning Model</h3>
-            <p class="mt-2 text-sm text-slate-200">
-              An urban planning model, showcasing the layout and design of a
-              city block with various building types.
-            </p>
-          </div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Sustainable Design Model</h3>
+          <p>
+            A model emphasizing sustainable design principles, incorporating
+            energy-efficient features and green materials.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-bg" style="background-image:url('/models/model5.png')">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Renovation Project Model</h3>
+          <p>
+            A renovation project model, illustrating the transformation of an
+            existing structure with updated designs.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-bg" style="background-image:url('/models/model6.png')">
+        </div>
+        <div class="card-overlay"></div>
+        <div class="card-content">
+          <h3>Urban Planning Model</h3>
+          <p>
+            An urban planning model, showcasing the layout and design of a city
+            block with various building types.
+          </p>
         </div>
       </div>
     </div>
-  </main>
+  </div>
 </Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header h2 {
+    font-size: 42px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.02em;
+  }
+  .header p {
+    margin-top: 16px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+    color: #475569;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+  }
+  .card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    height: 384px;
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .card-bg {
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.5s;
+  }
+  .card:hover .card-bg {
+    transform: scale(1.05);
+  }
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.3),
+      transparent
+    );
+  }
+  .card-content {
+    position: relative;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    color: white;
+  }
+  .card-content h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .card-content p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #e2e8f0;
+  }
+</style>

@@ -1,5 +1,11 @@
 ---
 import Bd from "~/icons/Bd.astro";
+
+const links = [
+  { href: "/project", label: "Projects" },
+  { href: "/models", label: "Revit Models" },
+  { href: "/about", label: "About Me" },
+];
 ---
 
 <header class="header">
@@ -9,9 +15,7 @@ import Bd from "~/icons/Bd.astro";
       <h2 class="header-title">Civil Engineering Portfolio</h2>
     </div>
     <nav class="header-nav">
-      <a href="#">Projects</a>
-      <a href="#">Revit Models</a>
-      <a href="#">About Me</a>
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
       <button class="header-button">Download CV</button>
     </nav>
   </div>
@@ -19,23 +23,23 @@ import Bd from "~/icons/Bd.astro";
 
 <style>
   .header {
-    position: sticky; /* sticky */
-    top: 0; /* top-0 */
-    z-index: 10; /* z-10 */
-    width: 100%; /* w-full */
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8); /* border-slate-200/80 */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
     background-color: rgba(var(--background-light-rgb, 255, 255, 255), 0.8);
-    padding-block: 0.5rem; /* py-2 */
-    backdrop-filter: blur(4px); /* backdrop-blur-sm */
+    padding-block: 0.5rem;
+    backdrop-filter: blur(4px);
   }
 
   :global(.dark) .header {
-    border-bottom: 1px solid rgba(30, 41, 59, 0.8); /* dark:border-slate-800/80 */
+    border-bottom: 1px solid rgba(30, 41, 59, 0.8);
     background-color: rgba(var(--background-dark-rgb, 15, 23, 42), 0.8);
   }
 
   .header-container {
-    max-width: 1280px; /* max-w-7xl */
+    max-width: 1280px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -45,39 +49,39 @@ import Bd from "~/icons/Bd.astro";
   .header-left {
     display: flex;
     align-items: center;
-    gap: 1rem; /* gap-4 */
+    gap: 1rem;
   }
 
   .header-title {
-    font-size: 1.25rem; /* text-xl */
-    font-weight: 700; /* font-bold */
+    font-size: 1.25rem;
+    font-weight: 700;
     margin: 0;
   }
 
   .header-nav {
     display: none;
     align-items: center;
-    gap: 2rem; /* gap-8 */
+    gap: 2rem;
   }
 
   .header-nav a {
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 500; /* font-medium */
+    font-size: 0.875rem;
+    font-weight: 500;
     text-decoration: none;
     color: inherit;
     transition: color 0.2s ease-in-out;
   }
 
   .header-nav a:hover {
-    color: var(--primary, #3b82f6); /* hover:text-primary */
+    color: var(--primary, #3b82f6);
   }
 
   .header-button {
-    border-radius: 0.25rem; /* rounded */
-    background-color: var(--primary, #3b82f6); /* bg-primary */
-    padding: 0.5rem 1rem; /* py-2 px-4 */
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 700; /* font-bold */
+    border-radius: 0.25rem;
+    background-color: var(--primary, #3b82f6);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 700;
     color: #ffffff;
     border: none;
     cursor: pointer;
@@ -85,10 +89,9 @@ import Bd from "~/icons/Bd.astro";
   }
 
   .header-button:hover {
-    background-color: rgba(59, 130, 246, 0.8); /* hover:bg-primary/80 */
+    background-color: rgba(59, 130, 246, 0.8);
   }
 
-  /* Mostrar navegación en pantallas medianas (md:flex) */
   @media (min-width: 768px) {
     .header-nav {
       display: flex;

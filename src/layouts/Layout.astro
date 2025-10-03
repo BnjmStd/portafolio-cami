@@ -47,7 +47,7 @@ const websiteImage = "http://camila-aracena.cl/images/home/menu-2.jpg";
     <ClientRouter />
     <Background />
     <Header />
-    <main>
+    <main class="main">
       <slot />
     </main>
     <Footer />
@@ -64,6 +64,23 @@ const websiteImage = "http://camila-aracena.cl/images/home/menu-2.jpg";
     padding: 0;
     margin: 0;
     font-family: var(--font-display), sans-serif;
+  }
+
+  .main {
+    min-block-size: 100vh;
+    min-block-size: 100dvh;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns:
+      [full-width-start]
+      minmax(2rem, 1fr)
+      [content-start]
+      min(1400px, 100% - 4rem)
+      [content-end]
+      minmax(2rem, 1fr)
+      [full-width-end];
   }
 
   @layer base {
