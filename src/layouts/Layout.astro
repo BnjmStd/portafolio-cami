@@ -47,14 +47,12 @@ const websiteImage = "http://camila-aracena.cl/images/home/menu-2.jpg";
     <ClientRouter />
     <Background />
     <Header />
-    <main class="main">
+    <main class="grid">
       <slot />
     </main>
     <Footer />
   </body>
 </html>
-
-<script></script>
 
 <style is:global>
   *,
@@ -66,12 +64,9 @@ const websiteImage = "http://camila-aracena.cl/images/home/menu-2.jpg";
     font-family: var(--font-display), sans-serif;
   }
 
-  .main {
+  .grid {
     min-block-size: 100vh;
     min-block-size: 100dvh;
-  }
-
-  .grid {
     display: grid;
     grid-template-columns:
       [full-width-start]
@@ -83,10 +78,14 @@ const websiteImage = "http://camila-aracena.cl/images/home/menu-2.jpg";
       [full-width-end];
   }
 
+  .grid > * {
+    grid-column: content-start / content-end;
+  }
+
   @layer base {
     :root {
       color-scheme: light;
-      --color-primary: #607afb;
+      --primary: #607afb;
       --color-background-light: #f5f6f8;
       --color-background-dark: #0f1323;
 
