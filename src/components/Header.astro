@@ -5,16 +5,15 @@ import ButtonDownloadCv from "./ButtonDownloadCv.astro";
 const links = [
   { href: "/project", label: "Projects" },
   { href: "/models", label: "Revit Models" },
-  { href: "/about", label: "About Me" },
 ];
 ---
 
 <header class="header">
   <div class="header-container">
-    <div class="header-left">
+    <a href="/" class="header-left">
       <Bd />
       <h2 class="header-title">Civil Engineering Portfolio</h2>
-    </div>
+    </a>
     <nav class="header-nav">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
       <ButtonDownloadCv />
@@ -51,6 +50,8 @@ const links = [
     display: flex;
     align-items: center;
     gap: 1rem;
+    text-decoration: none;
+    color: black;
   }
 
   .header-title {
