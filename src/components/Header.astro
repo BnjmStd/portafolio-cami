@@ -1,86 +1,192 @@
 ---
 import Bd from "~/icons/Bd.astro";
 import ButtonDownloadCv from "./ButtonDownloadCv.astro";
+import Menu from "~/icons/Menu.astro";
+import Close from "~/icons/Close.astro";
 
-const links = [
+const navLinks = [
   { href: "/project", label: "Projects" },
   { href: "/models", label: "Revit Models" },
 ];
 ---
 
-<header class="header">
+<header class="hero h-16">
   <div class="header-container">
-    <a href="/" class="header-left">
-      <Bd />
-      <h2 class="header-title">Civil Engineering Portfolio</h2>
-    </a>
-    <nav class="header-nav">
-      {links.map((link) => <a href={link.href}>{link.label}</a>)}
-      <ButtonDownloadCv />
-    </nav>
+    <div>
+      <a href="/">
+        <!-- <Github style="width: 28px; height: 28px;" /> -->
+        Camila Aracena
+      </a>
+    </div>
+
+    <div class="px-4 sm:px-6">
+      <input type="checkbox" id="sidebar-active" class="hidden" />
+      <label for="sidebar-active" class="open-sidebar-button">
+        <Menu />
+      </label>
+
+      <label id="overlay" for="sidebar-active"></label>
+
+      <nav id="desktop-nav" class="links-container">
+        <label for="sidebar-active" class="close-sidebar-button">
+          <a href="/">
+            <!-- <Github style="width: 28px; height: 28px;" /> -->
+            Camila Aracena
+          </a>
+          <Close />
+        </label>
+        <ul>
+          {
+            navLinks.map(({ href, label }) => (
+              <li>
+                <a href={href}>
+                  {/* <Icon style="width: 18px; height: 18px;" /> */}
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <ButtonDownloadCv />
+      </nav>
+    </div>
   </div>
 </header>
 
 <style>
-  .header {
+  :root {
+    --color-1: #0f1016;
+    --text-color: #f0f0f0;
+    --accent-color: #006aff;
+  }
+
+  svg {
+    block-size: 24px;
+    inline-size: 24px;
+    fill: var(--text-color);
+  }
+
+  #sidebar-active {
+    display: none;
+  }
+
+  .open-sidebar-button,
+  .close-sidebar-button {
+    display: none;
+    padding: 0 20px;
+    cursor: pointer;
+  }
+
+  .hero {
     position: sticky;
     top: 0;
-    z-index: 10;
-    width: 100%;
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-    background-color: rgba(var(--background-light-rgb, 255, 255, 255), 0.8);
-    padding-block: 0.5rem;
-    backdrop-filter: blur(4px);
-  }
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    color: var(--text-color);
 
-  :global(.dark) .header {
-    border-bottom: 1px solid rgba(30, 41, 59, 0.8);
-    background-color: rgba(var(--background-dark-rgb, 15, 23, 42), 0.8);
-  }
+    nav {
+      inline-size: 100%;
 
-  .header-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+      ul {
+        display: flex;
+        justify-content: center;
+        inline-size: 100%;
+      }
+    }
 
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    text-decoration: none;
-    color: black;
-  }
-
-  .header-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin: 0;
-  }
-
-  .header-nav {
-    display: none;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  .header-nav a {
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.2s ease-in-out;
-  }
-
-  .header-nav a:hover {
-    color: var(--primary, #3b82f6);
-  }
-
-  @media (min-width: 768px) {
-    .header-nav {
+    .header-container {
       display: flex;
+      block-size: 100%;
+      width: 100%;
+      max-width: 1480px;
+      margin-inline: auto;
+
+      > * {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      > :first-child {
+        margin-right: auto;
+      }
+    }
+
+    .home-link {
+      margin-right: auto;
+    }
+  }
+
+  .links-container {
+    block-size: 100%;
+    inline-size: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  @media (max-width: 1200px) {
+    .hero {
+      nav {
+        ul {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    }
+
+    .links-container {
+      flex-direction: column;
+      align-items: flex-start;
+      position: fixed;
+
+      height: 100vh;
+      padding-block: 0.6rem;
+
+      top: 0;
+      right: -100%;
+      z-index: 10;
+      inline-size: max-content;
+      background-color: white;
+      box-shadow: -5px 0 5px rgba(0, 0, 0, 0.25);
+
+      transition: 0.1s ease-in-out;
+    }
+
+    .open-sidebar-button,
+    .close-sidebar-button {
+      display: block;
+    }
+
+    #sidebar-active:checked ~ .links-container {
+      right: 0;
+    }
+
+    #overlay {
+      opacity: 0;
+      transition: 0.1s ease-in-out;
+    }
+
+    #sidebar-active:checked ~ #overlay {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.5);
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 5;
+    }
+
+    .close-sidebar-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      > *:last-child {
+        margin-left: auto;
+      }
     }
   }
 </style>
