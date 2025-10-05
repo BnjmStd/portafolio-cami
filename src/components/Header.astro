@@ -8,18 +8,20 @@ const navLinks = [
   { href: "/project", label: "Projects" },
   { href: "/models", label: "Revit Models" },
 ];
+
+const name = "Camila Aracena";
 ---
 
-<header class="hero h-16">
+<header class="hero">
   <div class="header-container">
     <div>
       <a href="/">
         <!-- <Github style="width: 28px; height: 28px;" /> -->
-        Camila Aracena
+        {name}
       </a>
     </div>
 
-    <div class="px-4 sm:px-6">
+    <div>
       <input type="checkbox" id="sidebar-active" class="hidden" />
       <label for="sidebar-active" class="open-sidebar-button">
         <Menu />
@@ -30,8 +32,7 @@ const navLinks = [
       <nav id="desktop-nav" class="links-container">
         <label for="sidebar-active" class="close-sidebar-button">
           <a href="/">
-            <!-- <Github style="width: 28px; height: 28px;" /> -->
-            Camila Aracena
+            {name}
           </a>
           <Close />
         </label>
@@ -40,7 +41,6 @@ const navLinks = [
             navLinks.map(({ href, label }) => (
               <li>
                 <a href={href}>
-                  {/* <Icon style="width: 18px; height: 18px;" /> */}
                   {label}
                 </a>
               </li>
@@ -84,6 +84,15 @@ const navLinks = [
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: white;
     color: var(--text-color);
+    padding-inline: 1.5rem; 
+    padding-block: 0.75rem;
+
+    a {
+      text-decoration: none;
+      color: var(--color-1);
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
 
     nav {
       inline-size: 100%;
