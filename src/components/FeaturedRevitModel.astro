@@ -2,18 +2,19 @@
 import ProjectRevitCard from "./cards/ProjectRevitCard.astro";
 
 const featuredModels = [
-  { image: "/edi1.png", title: "Residential Building Model", description: "Detailed Revit model of a modern residential building." },
-  { image: "/edi2.png", title: "Commercial Complex Model", description: "Comprehensive Revit model of a commercial complex." },
-  { image: "/edi3.png", title: "Infrastructure Project Model", description: "Revit model of a large-scale infrastructure project." },
+  {
+    image: "/models/capri.jpg",
+    title: "Capri Building Model",
+    description: "Detailed Revit model of a modern residential building.",
+    modelPath: "/3d/capri.glb",
+  },
 ];
 ---
 
 <section class="featured">
   <h2 class="featured-title">Featured Revit Models</h2>
   <div class="featured-grid">
-    {featuredModels.map((m) => (
-      <ProjectRevitCard {...m} type="model" />
-    ))}
+    {featuredModels.map((m) => <ProjectRevitCard {...m} type="model" />)}
   </div>
 </section>
 

@@ -29,6 +29,7 @@ import ToolkitSection from "./ToolkitSection.astro";
 <style>
   .about {
     flex-grow: 1;
+    inline-size: 100%;
   }
 
   .about-card {
@@ -40,6 +41,7 @@ import ToolkitSection from "./ToolkitSection.astro";
     border-radius: 0.75rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(59, 130, 246, 0.1);
+    inline-size: 100%;
   }
 
   @media (min-width: 768px) {
@@ -72,6 +74,21 @@ import ToolkitSection from "./ToolkitSection.astro";
   @media (min-width: 768px) {
     .about-text {
       text-align: left;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .about-card {
+      align-items: center; 
+      text-align: center; 
+    }
+
+    .about-text {
+      text-align: center;
+    }
+
+    .about-image {
+      margin-bottom: 1rem; 
     }
   }
 

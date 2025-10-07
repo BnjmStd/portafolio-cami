@@ -1,39 +1,27 @@
 ---
 import ProjectRevitCard from "./cards/ProjectRevitCard.astro";
 
-
-
 const projects = [
   {
-    image: "/contru1.png",
-    title: "Project Alpha",
-    description: "Description of Project Alpha.",
-    slug: "project-alpha"
-  },
-  {
-    image: "/contru2.png",
-    title: "Project Beta",
-    description: "Description of Project Beta.",
-    slug: "project-beta"
-  },
-  {
-    image: "/contru3.png",
-    title: "Project Gamma",
-    description: "Description of Project Gamma.",
-    slug: "project-gamma"
+    image: "/projects/tesis_cami.jpg",
+    title: "Memoria de título",
+    description:
+      "PROPUESTA DE MEJORA CONSTRUCTIVA CON LA METODOLOGÍA BIM, PARA VIVIENDAS UNIFAMILIARES DE LA CONSTRUCTORA COLBÚN SPA",
+    slug: "project1",
   },
 ];
 ---
 
-<section class="projects">
+<section id="proyectos" class="projects">
   <h2 class="projects-title">Projects</h2>
   <div class="projects-grid">
-    {projects.map((p) => (
-      <ProjectRevitCard {...p}  type="project" href={`/blog/${p.slug}`} />
-    ))}
+    {
+      projects.map((p) => (
+        <ProjectRevitCard {...p} type="project" href={`/blog/${p.slug}`} />
+      ))
+    }
   </div>
 </section>
-
 
 <style>
   .projects {

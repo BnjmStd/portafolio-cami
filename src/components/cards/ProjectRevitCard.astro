@@ -4,8 +4,9 @@ interface Props {
   title: string;
   description: string;
   href?: string;
-  type?: "project" | "model"; 
+  type?: "project" | "model";
   className?: string;
+  modelPath?: string;
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   href,
   type = "project",
   className = "",
+  modelPath = "",
 } = Astro.props;
 ---
 
@@ -22,6 +24,8 @@ const {
   href={type === "project" ? href : undefined}
   class={`card ${className}`}
   data-type={type}
+  data-title={title}
+  data-model={modelPath}
 >
   <div class="card-image" style={`background-image: url(${image});`}></div>
   <div class="card-body">
@@ -30,18 +34,16 @@ const {
   </div>
 </a>
 
-<script>
-  document.addEventListener("click", (e) => {
-    const card = e.target.closest('.card[data-type="model"]');
-    if (!card) return;
+<!-- Modal Global (solo se renderiza una vez) -->
+<div id="model-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="close-modal" class="close-btn">×</button>
+    <div id="loader">Cargando modelo...</div>
+    <div id="canvas-container"></div>
+  </div>
+</div>
 
-    e.preventDefault();
-    const title = card.querySelector(".card-title")?.textContent;
-    const img = card.querySelector(".card-image")?.style.backgroundImage;
-
-    alert(`Abrir modal para el modelo: ${title}`);
-  });
-</script>
+<script src="../../scripts/three.js"></script>
 
 <style>
   .card {
@@ -94,5 +96,51 @@ const {
 
   :global(.dark) .card-text {
     color: rgb(148, 163, 184);
+  }
+
+  /* Modal */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .hidden {
+    display: none;
+  }
+
+  .modal-content {
+    position: relative;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #canvas-container {
+    width: 80vw;
+    height: 70vh;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  #loader {
+    text-align: center;
+    margin-top: 3rem;
+    font-weight: bold;
   }
 </style>
