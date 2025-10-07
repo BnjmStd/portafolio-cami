@@ -20,19 +20,36 @@ const {
 } = Astro.props;
 ---
 
-<a
-  href={type === "project" ? href : undefined}
-  class={`card ${className}`}
-  data-type={type}
-  data-title={title}
-  data-model={modelPath}
->
-  <div class="card-image" style={`background-image: url(${image});`}></div>
-  <div class="card-body">
-    <h3 class="card-title">{title}</h3>
-    <p class="card-text">{description}</p>
-  </div>
-</a>
+{
+  type === "project" ? (
+    <a
+      href={href}
+      class={`card ${className}`}
+      data-type={type}
+      data-title={title}
+    >
+      <div class="card-image" style={`background-image: url(${image});`} />
+      <div class="card-body">
+        <h3 class="card-title">{title}</h3>
+        <p class="card-text">{description}</p>
+      </div>
+    </a>
+  ) : (
+    <div
+      class={`card ${className}`}
+      data-type={type}
+      data-title={title}
+      data-model={modelPath}
+      role="button"
+    >
+      <div class="card-image" style={`background-image: url(${image});`} />
+      <div class="card-body">
+        <h3 class="card-title">{title}</h3>
+        <p class="card-text">{description}</p>
+      </div>
+    </div>
+  )
+}
 
 <!-- Modal Global (solo se renderiza una vez) -->
 <div id="model-modal" class="modal hidden">
@@ -48,16 +65,18 @@ const {
 <style>
   .card {
     display: block;
-    cursor: pointer;
     overflow: hidden;
     border-radius: 0.5rem;
     background-color: var(--background-light, #ffffff);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition:
-      box-shadow 0.3s ease-in-out,
-      transform 0.1s ease-in-out;
+    box-shadow 0.3s ease-in-out,
+    transform 0.1s ease-in-out;
     text-decoration: none;
     color: inherit;
+    
+    cursor: pointer;
+    touch-action: manipulation;
   }
 
   .card:hover {
