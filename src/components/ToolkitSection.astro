@@ -1,0 +1,81 @@
+---
+import Power1 from "~/icons/Power1.astro";
+import Power2 from "~/icons/Power2.astro";
+import Power3 from "~/icons/Power3.astro";
+import Power4 from "~/icons/Power4.astro";
+import SkillCard from "./cards/SkillCard.astro";
+
+const toolkit = [
+  { icon: Power1, name: "Revit" },
+  { icon: Power2, name: "AutoCAD" },
+  { icon: Power3, name: "Civil 3D" },
+  { icon: Power4, name: "BIM 360" },
+];
+---
+
+<div class="toolkit">
+  <h2 class="toolkit-title">Professional Toolkit</h2>
+  <div class="toolkit-grid">
+    {
+      toolkit.map(({ icon: Icon, name }) => (
+        <SkillCard variant="column">
+          <div class="toolkit-icon">
+            <Icon />
+          </div>
+          <h3 class="toolkit-text">{name}</h3>
+        </SkillCard>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .toolkit {
+    margin-top: 3rem;
+  }
+
+  .toolkit-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: rgb(15, 23, 42);
+  }
+
+  :global(.dark) .toolkit-title {
+    color: #ffffff;
+  }
+
+  .toolkit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .toolkit-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .toolkit-icon {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+    color: rgba(59, 130, 246, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .toolkit-text {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: rgb(30, 41, 59);
+    margin: 0;
+  }
+
+  :global(.dark) .toolkit-text {
+    color: rgb(241, 245, 249);
+  }
+</style>

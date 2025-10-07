@@ -1,33 +1,37 @@
+---
+const featuredModels = [
+  {
+    image: "/edi1.png",
+    title: "Residential Building Model",
+    description: "Detailed Revit model of a modern residential building.",
+  },
+  {
+    image: "/edi2.png",
+    title: "Commercial Complex Model",
+    description: "Comprehensive Revit model of a commercial complex.",
+  },
+  {
+    image: "/edi3.png",
+    title: "Infrastructure Project Model",
+    description: "Revit model of a large-scale infrastructure project.",
+  },
+];
+---
+
 <section class="featured">
   <h2 class="featured-title">Featured Revit Models</h2>
   <div class="featured-grid">
-    <div class="card">
-      <div class="card-image" style='background-image: url("/edi1.png");'></div>
-      <div class="card-body">
-        <h3 class="card-title">Residential Building Model</h3>
-        <p class="card-text">
-          Detailed Revit model of a modern residential building.
-        </p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-image" style='background-image: url("/edi2.png");'></div>
-      <div class="card-body">
-        <h3 class="card-title">Commercial Complex Model</h3>
-        <p class="card-text">
-          Comprehensive Revit model of a commercial complex.
-        </p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-image" style='background-image: url("/edi3.png");'></div>
-      <div class="card-body">
-        <h3 class="card-title">Infrastructure Project Model</h3>
-        <p class="card-text">
-          Revit model of a large-scale infrastructure project.
-        </p>
-      </div>
-    </div>
+    {
+      featuredModels.map(({ image, title, description }) => (
+        <div class="card">
+          <div class="card-image" style={`background-image: url(${image});`} />
+          <div class="card-body">
+            <h3 class="card-title">{title}</h3>
+            <p class="card-text">{description}</p>
+          </div>
+        </div>
+      ))
+    }
   </div>
 </section>
 

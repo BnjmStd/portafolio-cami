@@ -1,30 +1,40 @@
+---
+const projects = [
+  {
+    image: "/contru1.png",
+    title: "Project Alpha",
+    description: "Description of Project Alpha.",
+  },
+  {
+    image: "/contru2.png",
+    title: "Project Beta",
+    description: "Description of Project Beta.",
+  },
+  {
+    image: "/contru3.png",
+    title: "Project Gamma",
+    description: "Description of Project Gamma.",
+  },
+];
+---
+
 <section class="projects">
   <h2 class="projects-title">Projects</h2>
   <div class="projects-grid">
-    <div class="project-card">
-      <div class="project-image" style='background-image: url("/contru1.png");'>
-      </div>
-      <div class="project-body">
-        <h3 class="project-title">Project Alpha</h3>
-        <p class="project-text">Description of Project Alpha.</p>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-image" style='background-image: url("/contru2.png");'>
-      </div>
-      <div class="project-body">
-        <h3 class="project-title">Project Beta</h3>
-        <p class="project-text">Description of Project Beta.</p>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-image" style='background-image: url("/contru3.png");'>
-      </div>
-      <div class="project-body">
-        <h3 class="project-title">Project Gamma</h3>
-        <p class="project-text">Description of Project Gamma.</p>
-      </div>
-    </div>
+    {
+      projects.map(({ image, title, description }) => (
+        <div class="project-card">
+          <div
+            class="project-image"
+            style={`background-image: url(${image});`}
+          />
+          <div class="project-body">
+            <h3 class="project-title">{title}</h3>
+            <p class="project-text">{description}</p>
+          </div>
+        </div>
+      ))
+    }
   </div>
 </section>
 

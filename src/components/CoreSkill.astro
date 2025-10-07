@@ -3,41 +3,33 @@ import RevitModeling from "~/icons/RevitModeling.astro";
 import StructuralAnalysis from "~/icons/StructuralAnalysis.astro";
 import ProjectManager from "~/icons/ProjectManager.astro";
 import TechnicalReporting from "~/icons/TechnicalReporting.astro";
+import SkillCard from "./cards/SkillCard.astro";
+
+const skills = [
+  { icon: RevitModeling, name: "Revit Modeling" },
+  { icon: StructuralAnalysis, name: "Structural Analysis" },
+  { icon: ProjectManager, name: "Project Management" },
+  { icon: TechnicalReporting, name: "Technical Reporting" },
+];
 ---
 
 <section class="featured">
   <h2 class="skills-title">Core Skills</h2>
   <div class="skills-grid">
-    <div class="skill-card">
-      <div class="skill-icon">
-        <RevitModeling />
-      </div>
-      <h3 class="skill-text">Revit Modeling</h3>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">
-        <StructuralAnalysis />
-      </div>
-      <h3 class="skill-text">Structural Analysis</h3>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">
-        <ProjectManager />
-      </div>
-      <h3 class="skill-text">Project Management</h3>
-    </div>
-    <div class="skill-card">
-      <div class="skill-icon">
-        <TechnicalReporting />
-      </div>
-      <h3 class="skill-text">Technical Reporting</h3>
-    </div>
+    {
+      skills.map(({ icon: Icon, name }) => (
+        <SkillCard variant="row">
+          <div class="skill-icon">
+            <Icon />
+          </div>
+          <h3 class="skill-text">{name}</h3>
+        </SkillCard>
+      ))
+    }
   </div>
 </section>
 
 <style>
-
-
   @media (min-width: 640px) {
     .skills {
       padding-top: 5rem;
@@ -69,22 +61,6 @@ import TechnicalReporting from "~/icons/TechnicalReporting.astro";
     .skills-grid {
       grid-template-columns: repeat(4, 1fr);
     }
-  }
-
-  .skill-card {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid rgb(226, 232, 240);
-    background-color: var(--background-light, #ffffff);
-    padding: 1rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  }
-
-  :global(.dark) .skill-card {
-    border: 1px solid rgb(30, 41, 59);
-    background-color: var(--background-dark, #0f172a);
   }
 
   .skill-icon {
