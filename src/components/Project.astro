@@ -1,19 +1,26 @@
 ---
+import ProjectRevitCard from "./cards/ProjectRevitCard.astro";
+
+
+
 const projects = [
   {
     image: "/contru1.png",
     title: "Project Alpha",
     description: "Description of Project Alpha.",
+    slug: "project-alpha"
   },
   {
     image: "/contru2.png",
     title: "Project Beta",
     description: "Description of Project Beta.",
+    slug: "project-beta"
   },
   {
     image: "/contru3.png",
     title: "Project Gamma",
     description: "Description of Project Gamma.",
+    slug: "project-gamma"
   },
 ];
 ---
@@ -21,22 +28,12 @@ const projects = [
 <section class="projects">
   <h2 class="projects-title">Projects</h2>
   <div class="projects-grid">
-    {
-      projects.map(({ image, title, description }) => (
-        <div class="project-card">
-          <div
-            class="project-image"
-            style={`background-image: url(${image});`}
-          />
-          <div class="project-body">
-            <h3 class="project-title">{title}</h3>
-            <p class="project-text">{description}</p>
-          </div>
-        </div>
-      ))
-    }
+    {projects.map((p) => (
+      <ProjectRevitCard {...p}  type="project" href={`/blog/${p.slug}`} />
+    ))}
   </div>
 </section>
+
 
 <style>
   .projects {
@@ -74,48 +71,5 @@ const projects = [
     .projects-grid {
       grid-template-columns: repeat(3, 1fr);
     }
-  }
-
-  .project-card {
-    overflow: hidden;
-    border-radius: 0.5rem;
-    background-color: var(--background-light, #ffffff);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-  }
-
-  .project-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  :global(.dark) .project-card {
-    background-color: var(--background-dark, #0f172a);
-  }
-
-  .project-image {
-    height: 12rem;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .project-body {
-    padding: 1.5rem;
-  }
-
-  .project-title {
-    font-size: 1.125rem;
-    font-weight: 700;
-    margin: 0;
-  }
-
-  .project-text {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    color: rgb(71, 85, 105);
-  }
-
-  :global(.dark) .project-text {
-    color: rgb(148, 163, 184);
   }
 </style>

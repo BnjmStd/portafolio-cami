@@ -1,0 +1,98 @@
+---
+interface Props {
+  image: string;
+  title: string;
+  description: string;
+  href?: string;
+  type?: "project" | "model"; 
+  className?: string;
+}
+
+const {
+  image,
+  title,
+  description,
+  href,
+  type = "project",
+  className = "",
+} = Astro.props;
+---
+
+<a
+  href={type === "project" ? href : undefined}
+  class={`card ${className}`}
+  data-type={type}
+>
+  <div class="card-image" style={`background-image: url(${image});`}></div>
+  <div class="card-body">
+    <h3 class="card-title">{title}</h3>
+    <p class="card-text">{description}</p>
+  </div>
+</a>
+
+<script>
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest('.card[data-type="model"]');
+    if (!card) return;
+
+    e.preventDefault();
+    const title = card.querySelector(".card-title")?.textContent;
+    const img = card.querySelector(".card-image")?.style.backgroundImage;
+
+    alert(`Abrir modal para el modelo: ${title}`);
+  });
+</script>
+
+<style>
+  .card {
+    display: block;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: var(--background-light, #ffffff);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition:
+      box-shadow 0.3s ease-in-out,
+      transform 0.1s ease-in-out;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  :global(.dark) .card {
+    background-color: var(--background-dark, #0f172a);
+  }
+
+  .card-image {
+    height: 12rem;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin: 0;
+    text-decoration: none;
+  }
+
+  .card-text {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: rgb(71, 85, 105);
+    text-decoration: none;
+  }
+
+  :global(.dark) .card-text {
+    color: rgb(148, 163, 184);
+  }
+</style>

@@ -1,37 +1,19 @@
 ---
+import ProjectRevitCard from "./cards/ProjectRevitCard.astro";
+
 const featuredModels = [
-  {
-    image: "/edi1.png",
-    title: "Residential Building Model",
-    description: "Detailed Revit model of a modern residential building.",
-  },
-  {
-    image: "/edi2.png",
-    title: "Commercial Complex Model",
-    description: "Comprehensive Revit model of a commercial complex.",
-  },
-  {
-    image: "/edi3.png",
-    title: "Infrastructure Project Model",
-    description: "Revit model of a large-scale infrastructure project.",
-  },
+  { image: "/edi1.png", title: "Residential Building Model", description: "Detailed Revit model of a modern residential building." },
+  { image: "/edi2.png", title: "Commercial Complex Model", description: "Comprehensive Revit model of a commercial complex." },
+  { image: "/edi3.png", title: "Infrastructure Project Model", description: "Revit model of a large-scale infrastructure project." },
 ];
 ---
 
 <section class="featured">
   <h2 class="featured-title">Featured Revit Models</h2>
   <div class="featured-grid">
-    {
-      featuredModels.map(({ image, title, description }) => (
-        <div class="card">
-          <div class="card-image" style={`background-image: url(${image});`} />
-          <div class="card-body">
-            <h3 class="card-title">{title}</h3>
-            <p class="card-text">{description}</p>
-          </div>
-        </div>
-      ))
-    }
+    {featuredModels.map((m) => (
+      <ProjectRevitCard {...m} type="model" />
+    ))}
   </div>
 </section>
 
@@ -60,48 +42,5 @@ const featuredModels = [
     .featured-grid {
       grid-template-columns: repeat(3, 1fr);
     }
-  }
-
-  .card {
-    overflow: hidden;
-    border-radius: 0.5rem;
-    background-color: var(--background-light, #ffffff);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-  }
-
-  .card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  :global(.dark) .card {
-    background-color: var(--background-dark, #0f172a);
-  }
-
-  .card-image {
-    height: 12rem;
-    width: 100%;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .card-body {
-    padding: 1.5rem;
-  }
-
-  .card-title {
-    font-size: 1.125rem;
-    font-weight: 700;
-    margin: 0;
-  }
-
-  .card-text {
-    margin-top: 0.5rem;
-    font-size: 0.875rem;
-    color: rgb(71, 85, 105);
-  }
-
-  :global(.dark) .card-text {
-    color: rgb(148, 163, 184);
   }
 </style>
