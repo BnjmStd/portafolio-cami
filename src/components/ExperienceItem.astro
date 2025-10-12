@@ -1,0 +1,151 @@
+---
+import LinkInline from "./LinkInline.astro"
+
+interface Props {
+  title: string
+  company: string
+  description: string
+  link?: string
+  date: string
+}
+
+const { title, company, description, link, date } = Astro.props
+---
+
+<div class="timeline-item">
+  <div class="timeline-header">
+    <div class="timeline-header-content">
+      <span class="timeline-bullet">&bull;</span>
+      <h3 class="timeline-title">{title}</h3>
+      <h4 class="timeline-company">{company}</h4>
+      <time class="timeline-date">{date}</time>
+    </div>
+  </div>
+
+  <div class="timeline-body">
+    {description}
+    {
+      link && (
+        <LinkInline href={link}>
+          Saber más{" "}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon-chevron"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 6l6 6l-6 6" />
+          </svg>
+        </LinkInline>
+      )
+    }
+  </div>
+</div>
+
+<style>
+/* === Timeline Layout === */
+.timeline-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  padding-bottom: 3rem;
+  margin: 0 3rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: 0;
+  height: 100%;
+  border-left: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+:global(.dark) .timeline-item::before {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* === Left Column === */
+.timeline-header {
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+.timeline-header-content {
+  position: sticky;
+  top: 0;
+}
+
+/* Bullet */
+.timeline-bullet {
+  position: absolute;
+  left: -42px;
+  font-size: 2.5rem;
+  color: #facc15; /* amarillo */
+  border-radius: 50%;
+}
+
+/* Title & Company */
+.timeline-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #facc15;
+}
+
+.timeline-company {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #4b5563; /* gris oscuro */
+}
+
+:global(.dark) .timeline-company {
+  color: #fff;
+}
+
+/* Date */
+.timeline-date {
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+  color: rgba(75, 85, 99, 0.8);
+}
+
+:global(.dark) .timeline-date {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* === Right Column === */
+.timeline-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  color: #4b5563;
+}
+
+:global(.dark) .timeline-body {
+  color: #d1d5db;
+}
+
+/* SVG Icon */
+.icon-chevron {
+  width: 1.25rem;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+/* Responsive (para pantallas medianas en adelante) */
+@media (min-width: 768px) {
+  .timeline-item {
+    grid-template-columns: 2fr 3fr;
+    gap: 2.5rem;
+  }
+}
+</style>
