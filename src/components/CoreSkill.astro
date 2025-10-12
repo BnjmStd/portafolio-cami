@@ -4,6 +4,7 @@ import StructuralAnalysis from "~/icons/StructuralAnalysis.astro";
 import ProjectManager from "~/icons/ProjectManager.astro";
 import TechnicalReporting from "~/icons/TechnicalReporting.astro";
 import SkillCard from "./cards/SkillCard.astro";
+import SectionAndTitle from "./SectionAndTitle.astro";
 
 const skills = [
   { icon: RevitModeling, name: "Revit Modeling" },
@@ -13,8 +14,7 @@ const skills = [
 ];
 ---
 
-<section class="featured">
-  <h2 class="skills-title">Core Skills</h2>
+<SectionAndTitle title="Core Skills">
   <div class="skills-grid">
     {
       skills.map(({ icon: Icon, name }) => (
@@ -27,24 +27,9 @@ const skills = [
       ))
     }
   </div>
-</section>
+</SectionAndTitle>
 
 <style>
-  @media (min-width: 640px) {
-    .skills {
-      padding-top: 5rem;
-      padding-bottom: 5rem;
-    }
-  }
-
-  .skills-title {
-    margin-bottom: 2rem;
-    text-align: center;
-    font-size: 1.875rem;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-  }
-
   .skills-grid {
     display: grid;
     grid-template-columns: 1fr;

@@ -1,5 +1,6 @@
 ---
 import ExperienceItem from "./ExperienceItem.astro";
+import SectionAndTitle from "./SectionAndTitle.astro";
 
 const EXPERIENCE = [
   {
@@ -20,12 +21,14 @@ const EXPERIENCE = [
 ];
 ---
 
-<ol class="relative mt-16">
-  {
-    EXPERIENCE.map((experience) => (
-      <li class="">
-        <ExperienceItem {...experience} />
-      </li>
-    ))
-  }
-</ol>
+<SectionAndTitle title="Experiencia">
+  <ol class="relative mt-16">
+    {
+      EXPERIENCE.map((experience) => (
+        <li class="">
+          <ExperienceItem {...experience} />
+        </li>
+      ))
+    }
+  </ol>
+</SectionAndTitle>

@@ -1,5 +1,6 @@
 ---
 import ProjectRevitCard from "./cards/ProjectRevitCard.astro";
+import SectionAndTitle from "./SectionAndTitle.astro";
 
 const featuredModels = [
   {
@@ -11,22 +12,13 @@ const featuredModels = [
 ];
 ---
 
-<section class="featured">
-  <h2 class="featured-title">Featured Revit Models</h2>
+<SectionAndTitle title="Featured Revit Models">
   <div class="featured-grid">
     {featuredModels.map((m) => <ProjectRevitCard {...m} type="model" />)}
   </div>
-</section>
+</SectionAndTitle>
 
 <style>
-  .featured-title {
-    margin-bottom: 2rem;
-    text-align: center;
-    font-size: 1.875rem;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-  }
-
   .featured-grid {
     display: grid;
     grid-template-columns: 1fr;

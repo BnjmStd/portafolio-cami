@@ -1,0 +1,72 @@
+---
+const { text } = Astro.props;
+---
+
+<div class="custom-container">
+  <span class="border-wrapper">
+    <span class="spinning-border"></span>
+    <div class="inner-content">
+      {text}
+    </div>
+  </span>
+</div>
+
+<style>
+  .custom-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .border-wrapper {
+    position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    border-radius: 9999px; /* full rounded */
+    padding: 1px;
+  }
+
+  .spinning-border {
+    position: absolute;
+    inset: -1000%;
+    background: conic-gradient(
+      from 90deg at 50% 50%,
+      #51e4b8 0%,
+      #21554e 50%,
+      #51e4b8 100%
+    );
+    animation: spin 2s linear infinite;
+  }
+
+  .inner-content {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.25rem 0.75rem; /* py-1 px-3 */
+    font-size: 0.875rem; /* text-sm */
+    color: #065f46; /* text-green-800 */
+    background-color: #d1fae5; /* bg-green-100 */
+    border-radius: 9999px;
+    cursor: pointer;
+    backdrop-filter: blur(12px); /* backdrop-blur-3xl */
+    white-space: nowrap;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+
+  /* Dark mode (optional — detect via prefers-color-scheme) */
+  @media (prefers-color-scheme: dark) {
+    .inner-content {
+      background-color: #1f2937; /* dark:bg-gray-800 */
+      color: rgba(255, 255, 255, 0.8); /* dark:text-white/80 */
+    }
+  }
+
+  /* Spinner animation */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
