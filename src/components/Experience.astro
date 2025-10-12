@@ -22,7 +22,7 @@ const EXPERIENCE = [
 ---
 
 <SectionAndTitle title="Experiencia">
-  <ol class="relative mt-16">
+  <ol>
     {
       EXPERIENCE.map((experience) => (
         <li class="">
@@ -32,3 +32,10 @@ const EXPERIENCE = [
     }
   </ol>
 </SectionAndTitle>
+
+<style>
+  ol {
+    position: relative;
+    margin-block-start: 2rem;
+  }
+</style>

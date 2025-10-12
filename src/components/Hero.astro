@@ -16,6 +16,15 @@ const nombre = "Camila Aracena";
       </div>
       <a href="#proyectos" class="hero-button">Ver Proyectos</a>
     </div>
+    <div class="container-img">
+      <img
+        width="200"
+        height="200"
+        src="/profile.jpg"
+        alt="Descripción de la imagen"
+        class="custom-image"
+      />
+    </div>
   </div>
 </section>
 
@@ -62,6 +71,46 @@ const nombre = "Camila Aracena";
 </script>
 
 <style>
+  /*  */
+
+  .container-img {
+    display: inline-block;
+    padding: 0.4rem;
+    border: 1px dashed rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    transform: rotate(3deg);
+  }
+
+  .custom-image {
+    display: block;
+    width: 6rem;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 0.8rem;
+  }
+
+  @media (min-width: 768px) {
+    .custom-image {
+      order: 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .custom-image {
+      padding: 0.5rem;
+      width: 16rem;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .custom-image {
+      background-color: rgba(234, 179, 8, 0.05);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  /*  */
+
   .hero {
     border-radius: 0.75rem;
     background-image: linear-gradient(
@@ -71,6 +120,9 @@ const nombre = "Camila Aracena";
       url("/terreno.png");
     background-size: cover;
     background-position: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .hero-content {
