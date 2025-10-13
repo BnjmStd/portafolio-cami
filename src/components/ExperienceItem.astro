@@ -50,7 +50,6 @@ const { title, company, description, link, date } = Astro.props;
 </div>
 
 <style>
-  /* === Timeline Layout === */
   .timeline-item {
     position: relative;
     display: grid;
@@ -88,7 +87,7 @@ const { title, company, description, link, date } = Astro.props;
     position: absolute;
     left: -42px;
     font-size: 2.5rem;
-    color: #facc15; /* amarillo */
+    color: var(--primary); 
     border-radius: 50%;
   }
 
@@ -96,20 +95,19 @@ const { title, company, description, link, date } = Astro.props;
   .timeline-title {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #facc15;
+    color: var(--primary);
   }
 
   .timeline-company {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #4b5563; /* gris oscuro */
+    color: #4b5563; 
   }
 
   :global(.dark) .timeline-company {
     color: #fff;
   }
 
-  /* Date */
   .timeline-date {
     margin: 0;
     padding: 0;
@@ -141,7 +139,6 @@ const { title, company, description, link, date } = Astro.props;
     margin-left: 0.25rem;
   }
 
-  /* Responsive (para pantallas medianas en adelante) */
   @media (min-width: 768px) {
     .timeline-item {
       grid-template-columns: 2fr 3fr;

@@ -71,19 +71,22 @@ const nombre = "Camila Aracena";
 </script>
 
 <style>
-  /*  */
-
   .container-img {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
     padding: 0.4rem;
     border: 1px dashed rgba(0, 0, 0, 0.3);
     border-radius: 1rem;
     transform: rotate(3deg);
+    max-width: 240px;
+    margin: 0 auto;
   }
 
   .custom-image {
     display: block;
-    width: 6rem;
+    width: 8rem;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 0.8rem;
@@ -109,7 +112,6 @@ const nombre = "Camila Aracena";
     }
   }
 
-  /*  */
 
   .hero {
     border-radius: 0.75rem;
@@ -123,6 +125,9 @@ const nombre = "Camila Aracena";
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 2rem;
   }
 
   .hero-content {
@@ -134,9 +139,35 @@ const nombre = "Camila Aracena";
     padding: 2rem;
   }
 
-  @media (min-width: 640px) {
+  @media (max-width: 640px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+    }
+
     .hero-content {
-      padding: 3rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-text {
+      text-align: center;
+    }
+
+    .container-img {
+      transform: none;
+      border: none;
+      margin-top: 1rem;
+    }
+
+    .custom-image {
+      width: 10rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .custom-image {
+      width: 16rem;
     }
   }
 
@@ -154,12 +185,6 @@ const nombre = "Camila Aracena";
     margin: 0;
   }
 
-  @media (min-width: 640px) {
-    .hero-title {
-      font-size: 3rem;
-    }
-  }
-
   @media (min-width: 768px) {
     .hero-title {
       font-size: 3.75rem;
@@ -173,21 +198,15 @@ const nombre = "Camila Aracena";
     margin: 0;
   }
 
-  @media (min-width: 640px) {
-    .hero-subtitle {
-      font-size: 1.125rem; /* sm:text-lg */
-    }
-  }
-
   .hero-button {
-    margin-top: 2rem; /* mt-8 */
-    border-radius: 0.5rem; /* rounded-lg */
-    background-color: var(--primary, #3b82f6); /* bg-primary */
-    padding: 0.75rem 1.5rem; /* py-3 px-6 */
-    font-size: 1rem; /* text-base */
-    font-weight: 700; /* font-bold */
+    margin-top: 2rem;
+    border-radius: 0.5rem;
+    background-color: var(--primary, #3b82f6);
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
     color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
     cursor: pointer;
     border: none;
@@ -195,6 +214,6 @@ const nombre = "Camila Aracena";
   }
 
   .hero-button:hover {
-    transform: scale(1.05); /* hover:scale-105 */
+    transform: scale(1.05); 
   }
 </style>

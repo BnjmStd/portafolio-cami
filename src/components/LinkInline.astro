@@ -10,24 +10,24 @@ const { href } = Astro.props;
   .link-inline {
     display: inline-flex;
     align-items: center;
-    font-size: 1.125rem; /* text-lg */
-    font-weight: 500; /* font-medium */
-    color: #eab308; /* text-yellow-500 */
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--primary);
     text-decoration: none;
     transition: color 0.2s ease-in-out;
   }
 
   /* Hover effect */
   .link-inline:hover {
-    color: #a16207; /* similar a hover:text-yellow-700 */
+    color: var(--primary);
   }
 
   /* Dark mode colors */
   :global(.dark) .link-inline {
-    color: #fde68a; /* text-yellow-200 */
+    color: var(--primary);
   }
 
   :global(.dark) .link-inline:hover {
-    color: #fef08a; /* dark:hover:text-yellow-300 */
+    color: var(--primary);
   }
 </style>
