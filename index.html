@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acordeón de Opciones</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: #f4f7fb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .accordion-container {
+        display: flex;
+        width: 800px;
+        height: 300px; /* Fijamos el alto total */
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .accordion-menu {
+        background: #2d3748;
+        width: 35%;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto; /* Scroll vertical */
+      }
+
+      /* Scroll bonito */
+      .accordion-menu::-webkit-scrollbar {
+        width: 8px;
+      }
+      .accordion-menu::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 4px;
+      }
+
+      .accordion-item {
+        padding: 20px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background 0.3s;
+        flex-shrink: 0;
+      }
+
+      .accordion-item:hover,
+      .accordion-item.active {
+        background: #4a5568;
+      }
+
+      .accordion-content {
+        width: 65%;
+        padding: 40px;
+        overflow-y: auto; /* Si hay mucho texto, que tenga scroll */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .accordion-content h2 {
+        margin-bottom: 15px;
+      }
+
+      #description {
+        flex-grow: 1;
+        overflow-y: auto;
+        line-height: 1.5;
+      }
+
+      #description::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      #description::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+      }
+
+      #action-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background: #3182ce;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s;
+        align-self: flex-start;
+      }
+
+      #action-btn:hover {
+        background: #2b6cb0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="accordion-container">
+      <div class="accordion-menu">
+        <!-- Varias opciones para que haya scroll -->
+        <div class="accordion-item" data-id="1">Opción 1</div>
+        <div class="accordion-item" data-id="2">Opción 2</div>
+        <div class="accordion-item" data-id="3">Opción 3</div>
+        <div class="accordion-item" data-id="4">Opción 4</div>
+        <div class="accordion-item" data-id="5">Opción 5</div>
+        <div class="accordion-item" data-id="6">Opción 6</div>
+        <div class="accordion-item" data-id="7">Opción 7</div>
+        <div class="accordion-item" data-id="8">Opción 8</div>
+        <div class="accordion-item" data-id="9">Opción 9</div>
+        <div class="accordion-item" data-id="10">Opción 10</div>
+      </div>
+
+      <div class="accordion-content">
+        <div>
+          <h2 id="title">Selecciona una opción</h2>
+          <p id="description">
+            Haz clic en una opción del menú para ver más detalles.
+          </p>
+        </div>
+        <button id="action-btn" style="display: none">Acción</button>
+      </div>
+    </div>
+
+    <script>
+      const items = document.querySelectorAll(".accordion-item");
+      const title = document.getElementById("title");
+      const description = document.getElementById("description");
+      const btn = document.getElementById("action-btn");
+
+      const data = {
+        1: {
+          title: "Opción 1: Información General",
+          description:
+            "Esta es una descripción detallada sobre la primera opción. Aquí puedes mostrar información relevante con texto extenso para probar el scroll. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo justo id orci varius, nec ultricies libero sagittis.",
+          action: () => alert("Ejecutando acción de la Opción 1 🚀"),
+        },
+        2: {
+          title: "Opción 2: Configuración",
+          description:
+            "Aquí puedes modificar opciones, cambiar preferencias o personalizar tu experiencia.",
+          action: () => alert("Configuración abierta ⚙️"),
+        },
+        3: {
+          title: "Opción 3: Reportes",
+          description:
+            "Accede a estadísticas, reportes o resúmenes de datos. Si el contenido es largo, el área tendrá scroll interno.",
+          action: () => alert("Mostrando reportes 📊"),
+        },
+        4: {
+          title: "Opción 4: Usuarios",
+          description: "Administra los usuarios del sistema y sus permisos.",
+          action: () => alert("Gestión de usuarios 👥"),
+        },
+        5: {
+          title: "Opción 5: Seguridad",
+          description:
+            "Configura contraseñas, accesos y métodos de autenticación.",
+          action: () => alert("Configuración de seguridad 🔒"),
+        },
+        6: {
+          title: "Opción 6: Integraciones",
+          description:
+            "Conecta servicios externos como APIs o aplicaciones de terceros.",
+          action: () => alert("Integraciones activadas 🔗"),
+        },
+        7: {
+          title: "Opción 7: Notificaciones",
+          description:
+            "Administra las alertas y notificaciones automáticas del sistema.",
+          action: () => alert("Gestión de notificaciones 🔔"),
+        },
+        8: {
+          title: "Opción 8: Temas",
+          description:
+            "Cambia los colores, tipografía y apariencia general del sistema.",
+          action: () => alert("Personalizando tema 🎨"),
+        },
+        9: {
+          title: "Opción 9: Copias de seguridad",
+          description:
+            "Realiza y gestiona copias de seguridad automáticas o manuales.",
+          action: () => alert("Copia de seguridad en progreso 💾"),
+        },
+        10: {
+          title: "Opción 10: Cerrar sesión",
+          description: "Finaliza tu sesión de forma segura.",
+          action: () => alert("Sesión cerrada 👋"),
+        },
+      };
+
+      items.forEach((item) => {
+        item.addEventListener("click", () => {
+          items.forEach((i) => i.classList.remove("active"));
+          item.classList.add("active");
+
+          const id = item.getAttribute("data-id");
+          const info = data[id];
+
+          title.textContent = info.title;
+          description.textContent = info.description;
+          btn.style.display = "inline-block";
+          btn.onclick = info.action;
+        });
+      });
+    </script>
+  </body>
+</html>
