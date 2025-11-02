@@ -54,7 +54,18 @@ const {
 <!-- Modal Global (solo se renderiza una vez) -->
 <div id="model-modal" class="modal hidden">
   <div class="modal-content">
-    <button id="close-modal" class="close-btn">×</button>
+    <button id="close-modal" class="close-btn"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        fill="currentColor"
+        ><path
+          d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"
+        ></path></svg
+      ></button
+    >
     <div id="loader">Cargando modelo...</div>
     <div id="canvas-container"></div>
   </div>
@@ -63,6 +74,10 @@ const {
 <script src="../../scripts/three.js"></script>
 
 <style>
+  svg {
+    fill: white;
+  }
+
   .card {
     display: block;
     overflow: hidden;
@@ -70,11 +85,11 @@ const {
     background-color: var(--background-light, #ffffff);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition:
-    box-shadow 0.3s ease-in-out,
-    transform 0.1s ease-in-out;
+      box-shadow 0.3s ease-in-out,
+      transform 0.1s ease-in-out;
     text-decoration: none;
     color: inherit;
-    
+
     cursor: pointer;
     touch-action: manipulation;
   }

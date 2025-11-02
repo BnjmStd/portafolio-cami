@@ -2,218 +2,158 @@
 import Badge from "./Badge.astro";
 
 const nombre = "Camila Aracena";
+const rol = "Ingeniería Civil | Especializada en Modelado Revit";
 ---
 
-<section class="featured">
+<section class="featured" id="inicio">
   <div class="hero">
     <div class="hero-content">
-      <div class="hero-text">
-        <h1 class="hero-title">{nombre}</h1>
-        <p class="hero-subtitle">
-          Ingeniería Civil Reciente Graduada | Especializada en Modelado Revit
-        </p>
-        <Badge text="Disponible para Contratación" />
+      <div class="hero-text animate-in">
+        <h1 class="hero-title">
+          <span class="gradient-text">{nombre}</span>
+        </h1>
+        <h2 class="hero-role">{rol}</h2>
+        <a href="#proyectos" class="hero-button">Ver Proyectos</a>
       </div>
-      <a href="#proyectos" class="hero-button">Ver Proyectos</a>
     </div>
-    <div class="container-img">
+
+    <div class="container-img animate-in">
       <img
-        width="200"
-        height="200"
         src="/profile.jpg"
-        alt="Descripción de la imagen"
+        alt="Camila Aracena"
         class="custom-image"
+        width="300"
+        height="300"
       />
     </div>
   </div>
 </section>
 
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const sections = document.querySelectorAll("section");
-    const navItems = document.querySelectorAll("header nav a");
-
-    const callback = (entries: any[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("aria-label") == entry.target.id) {
-              item.classList.add("text-blue-500");
-            } else {
-              item.classList.remove("text-blue-500");
-            }
-          });
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(callback, {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.3,
-    });
-
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
-
-    // Cleanup function
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") {
-        observer.disconnect();
-      } else {
-        sections.forEach((section) => {
-          observer.observe(section);
-        });
-      }
-    };
-  });
-</script>
-
 <style>
-  .container-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    padding: 0.4rem;
-    border: 1px dashed rgba(0, 0, 0, 0.3);
-    border-radius: 1rem;
-    transform: rotate(3deg);
-    max-width: 240px;
-    margin: 0 auto;
-  }
 
-  .custom-image {
-    display: block;
-    width: 8rem;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 0.8rem;
+  .featured {
+    padding: 3rem 1.5rem;
   }
-
-  @media (min-width: 768px) {
-    .custom-image {
-      order: 2;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .custom-image {
-      padding: 0.5rem;
-      width: 16rem;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .custom-image {
-      background-color: rgba(234, 179, 8, 0.05);
-      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2);
-    }
-  }
-
 
   .hero {
-    border-radius: 0.75rem;
-    background-image: linear-gradient(
-        rgba(0, 0, 0, 0.2) 0%,
-        rgba(0, 0, 0, 0.6) 100%
+    background: linear-gradient(
+        rgba(15, 23, 42, 0.65),
+        rgba(15, 23, 42, 0.8)
       ),
-      url("/terreno.png");
-    background-size: cover;
-    background-position: center;
+      url("/terreno.png") center/cover no-repeat;
+    border-radius: 1rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     flex-wrap: wrap;
-    gap: 1.5rem;
-    padding: 2rem;
+    gap: 2rem;
+    overflow: hidden;
   }
 
   .hero-content {
-    display: flex;
-    min-height: 480px;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    padding: 2rem;
-  }
-
-  @media (max-width: 640px) {
-    .hero {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .hero-content {
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-text {
-      text-align: center;
-    }
-
-    .container-img {
-      transform: none;
-      border: none;
-      margin-top: 1rem;
-    }
-
-    .custom-image {
-      width: 10rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .custom-image {
-      width: 16rem;
-    }
+    flex: 1 1 45%;
+    padding: 3rem;
   }
 
   .hero-text {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    text-align: left;
   }
 
   .hero-title {
-    font-size: 2.25rem;
-    font-weight: 900;
-    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
     margin: 0;
   }
 
-  @media (min-width: 768px) {
-    .hero-title {
-      font-size: 3.75rem;
-    }
+  .gradient-text {
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  .hero-subtitle {
-    max-width: 32rem;
-    font-size: 1rem;
+  .hero-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.2rem;
     color: rgb(226, 232, 240);
-    margin: 0;
+    font-weight: 500;
+    margin-bottom: 1rem;
   }
 
   .hero-button {
-    margin-top: 2rem;
-    border-radius: 0.5rem;
-    background-color: var(--primary, #3b82f6);
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-    cursor: pointer;
+    align-self: flex-start;
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    color: white;
     border: none;
+    padding: 0.8rem 1.6rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
     text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
   }
 
   .hero-button:hover {
-    transform: scale(1.05); 
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+  }
+
+  .container-img {
+    flex: 1 1 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .custom-image {
+    width: 16rem;
+    height: 16rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .custom-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.4);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-content {
+      padding: 1rem;
+    }
+
+    .hero-button {
+      align-self: center;
+    }
+  }
+
+  /* Animaciones */
+  .animate-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>

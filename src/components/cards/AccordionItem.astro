@@ -1,0 +1,43 @@
+---
+interface Props {
+  id: number;
+  title: string;
+  description: string;
+  modelPath: string;
+  image: string;
+}
+
+const { id, title, description, modelPath, image } = Astro.props;
+---
+
+<div
+  class="accordion-item"
+  data-id={id}
+  data-title={title}
+  data-description={description}
+  data-model={modelPath}
+>
+  <div class="item-content">
+    <img src={image} alt={title} class="item-thumb" />
+    <span>{title}</span>
+  </div>
+</div>
+
+<style>
+  .item-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .item-thumb {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  span {
+    font-weight: 500;
+  }
+</style>

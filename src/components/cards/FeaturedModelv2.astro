@@ -1,0 +1,220 @@
+---
+import AccordionItem from "./AccordionItem.astro";
+import SectionAndTitle from "./SectionAndTitle.astro";
+
+const featuredModels = [
+  {
+    id: 1,
+    title: "Capri Building Model",
+    description:
+      "Detailed Revit model of a modern residential building with realistic lighting and structure details.",
+    modelPath: "/3d/capri.glb",
+    image: "/models/capri.jpg",
+  },
+  {
+    id: 2,
+    title: "Skyline Tower",
+    description:
+      "High-rise Revit model showcasing modern architecture and facade detailing.",
+    modelPath: "/3d/skyline.glb",
+    image: "/models/skyline.jpg",
+  },
+];
+---
+
+<SectionAndTitle title="Featured Revit Models">
+  <div class="accordion-container">
+    <div class="accordion-menu">
+      {featuredModels.map((project) => (
+        <AccordionItem {...project} />
+      ))}
+    </div>
+
+    <div class="accordion-content">
+      <div>
+        <h2 id="title">Selecciona un proyecto</h2>
+        <p id="description">
+          Haz clic en un modelo de la lista para ver los detalles.
+        </p>
+      </div>
+      <button id="action-btn" style="display: none">Ver Modelo</button>
+    </div>
+  </div>
+</SectionAndTitle>
+
+<!-- Modal (mantiene tu funcionalidad actual con Three.js) -->
+<div id="model-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="close-modal" class="close-btn"
+      ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+        <path d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"></path>
+      </svg></button>
+    <div id="loader">Cargando modelo...</div>
+    <div id="canvas-container"></div>
+  </div>
+</div>
+
+<script src="../../scripts/three.js"></script>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const items = document.querySelectorAll(".accordion-item");
+    const title = document.getElementById("title");
+    const description = document.getElementById("description");
+    const btn = document.getElementById("action-btn");
+
+    let currentModel = "";
+
+    items.forEach((item) => {
+      item.addEventListener("click", () => {
+        items.forEach((i) => i.classList.remove("active"));
+        item.classList.add("active");
+
+        const t = item.getAttribute("data-title");
+        const d = item.getAttribute("data-description");
+        const m = item.getAttribute("data-model");
+
+        title.textContent = t;
+        description.textContent = d;
+        currentModel = m;
+
+        btn.style.display = "inline-block";
+      });
+    });
+
+    // Abre el modal con el modelo
+    btn.addEventListener("click", () => {
+      const modal = document.getElementById("model-modal");
+      modal.classList.remove("hidden");
+      // Tu lógica three.js cargará el modelo en #canvas-container usando currentModel
+      console.log("Cargar modelo:", currentModel);
+    });
+
+    // Cierra el modal
+    document.getElementById("close-modal").addEventListener("click", () => {
+      document.getElementById("model-modal").classList.add("hidden");
+    });
+  });
+</script>
+
+<style>
+  .accordion-container {
+    display: flex;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    min-height: 400px;
+  }
+
+  .accordion-menu {
+    background: #2d3748;
+    width: 35%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .accordion-item {
+    padding: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s;
+  }
+
+  .accordion-item:hover,
+  .accordion-item.active {
+    background: #4a5568;
+  }
+
+  .accordion-content {
+    width: 65%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #description {
+    line-height: 1.5;
+    color: #2d3748;
+  }
+
+  #action-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+    align-self: flex-start;
+  }
+
+  #action-btn:hover {
+    background: #2b6cb0;
+  }
+
+  /* Modal */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  .hidden {
+    display: none;
+  }
+
+  .modal-content {
+    position: relative;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 90vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #canvas-container {
+    width: 80vw;
+    height: 70vh;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  #loader {
+    text-align: center;
+    margin-top: 3rem;
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .accordion-container {
+      flex-direction: column;
+    }
+    .accordion-menu {
+      width: 100%;
+      flex-direction: row;
+      overflow-x: auto;
+    }
+    .accordion-content {
+      width: 100%;
+      padding: 20px;
+    }
+  }
+</style>
