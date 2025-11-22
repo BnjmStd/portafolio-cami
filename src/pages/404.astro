@@ -1,0 +1,105 @@
+---
+import Layout from "~/layouts/Layout.astro";
+---
+
+<Layout title="Página no encontrada">
+    <div class="not-found-container">
+        <div class="not-found-content">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Página no disponible</h1>
+            <p class="error-description">
+                Lo siento, este proyecto aún no tiene contenido disponible o la
+                página que buscas no existe.
+            </p>
+            <a href="/" class="back-home-btn">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path d="M19 12H5M12 19l-7-7 7-7"></path>
+                </svg>
+                Volver al inicio
+            </a>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .not-found-container {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .not-found-content {
+        text-align: center;
+        max-width: 600px;
+    }
+
+    .error-code {
+        font-size: 8rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--primary), #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 1rem;
+    }
+
+    .error-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-text);
+        margin-bottom: 1rem;
+    }
+
+    .error-description {
+        font-size: 1.125rem;
+        color: var(--color-text-muted);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .back-home-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.875rem 1.75rem;
+        background: var(--primary);
+        color: white;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(96, 122, 251, 0.3);
+    }
+
+    .back-home-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(96, 122, 251, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        .error-code {
+            font-size: 5rem;
+        }
+
+        .error-title {
+            font-size: 1.5rem;
+        }
+
+        .error-description {
+            font-size: 1rem;
+        }
+    }
+</style>

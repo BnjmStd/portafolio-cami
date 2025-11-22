@@ -82,41 +82,58 @@ const TOOLKIT = [
 </SectionAndTitle>
 
 <script>
-    const items = document.querySelectorAll(".scroll-item");
-    const stickyName = document.getElementById("sticky-name");
-    const stickyIcons = document.querySelectorAll(".sticky-icon");
+    function initToolkitScroll() {
+        const items = document.querySelectorAll(".scroll-item");
+        const stickyName = document.getElementById("sticky-name");
+        const stickyIcons = document.querySelectorAll(".sticky-icon");
 
-    const observerOptions = {
-        root: null,
-        rootMargin: "-40% 0px -40% 0px",
-        threshold: 0,
-    };
+        if (!items.length || !stickyName || !stickyIcons.length) return;
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const target = entry.target as HTMLElement;
-                const { id, name } = target.dataset;
+        // Set first item as active by default
+        items[0]?.classList.add("active");
 
-                // Update Name
-                if (stickyName) stickyName.textContent = name || "";
+        const observerOptions = {
+            root: null,
+            rootMargin: "-40% 0px -40% 0px",
+            threshold: 0,
+        };
 
-                // Update Icon visibility
-                stickyIcons.forEach((icon) => {
-                    icon.classList.remove("active");
-                    if (icon.id === `icon-${id}`) {
-                        icon.classList.add("active");
-                    }
-                });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const target = entry.target as HTMLElement;
+                    const { id, name } = target.dataset;
 
-                // Highlight active item
-                items.forEach((i) => i.classList.remove("active"));
-                entry.target.classList.add("active");
-            }
-        });
-    }, observerOptions);
+                    // Update Name
+                    if (stickyName && name) stickyName.textContent = name;
 
-    items.forEach((item) => observer.observe(item));
+                    // Update Icon visibility
+                    stickyIcons.forEach((icon) => {
+                        icon.classList.remove("active");
+                        if (icon.id === `icon-${id}`) {
+                            icon.classList.add("active");
+                        }
+                    });
+
+                    // Highlight active item
+                    items.forEach((i) => i.classList.remove("active"));
+                    entry.target.classList.add("active");
+                }
+            });
+        }, observerOptions);
+
+        items.forEach((item) => observer.observe(item));
+    }
+
+    // Initialize on load
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initToolkitScroll);
+    } else {
+        initToolkitScroll();
+    }
+
+    // Re-initialize on Astro page transitions
+    document.addEventListener("astro:page-load", initToolkitScroll);
 </script>
 
 <style>
@@ -143,8 +160,7 @@ const TOOLKIT = [
 
         .sticky-card {
             position: sticky;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 8rem;
             padding: 3rem;
             background: var(--color-card-bg);
             border: 1px solid var(--color-border);
@@ -237,7 +253,13 @@ const TOOLKIT = [
         flex-direction: column;
         gap: 50vh;
         padding-bottom: 20vh;
-        padding-top: 10vh;
+        padding-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+        .scroll-content {
+            padding-top: 10vh;
+        }
     }
 
     .scroll-item {

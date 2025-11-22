@@ -1,5 +1,4 @@
 ---
-import ProjectRevitCard from "./cards/ProjectRevitCard.astro";
 import SectionAndTitle from "./SectionAndTitle.astro";
 
 const projects = [
@@ -38,23 +37,26 @@ const projects = [
 ---
 
 <SectionAndTitle title="Projects">
-  <div class="project-carousel-container">
-    <div class="project-carousel-track">
+  <div class="project-carousel-wrapper">
+    <div class="project-carousel-track" id="project-track">
       {
         projects.map((p) => (
-          <div class="project-carousel-item">
-            <ProjectRevitCard
-              {...p}
-              type="project"
-              href={`/blog/${p.slug}`}
-              className="project-carousel-card"
+          <a href={`/blog/${p.slug}`} class="project-card">
+            <div
+              class="project-image"
+              style={`background-image: url(${p.image});`}
             />
-          </div>
+            <div class="project-content">
+              <h3 class="project-title">{p.title}</h3>
+              <p class="project-description">{p.description}</p>
+            </div>
+          </a>
         ))
       }
     </div>
-    <div class="carousel-nav">
-      <button class="nav-btn prev" aria-label="Previous slide">
+
+    <div class="project-nav">
+      <button class="project-nav-btn" id="project-prev" aria-label="Previous">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -67,7 +69,7 @@ const projects = [
           stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg
         >
       </button>
-      <button class="nav-btn next" aria-label="Next slide">
+      <button class="project-nav-btn" id="project-next" aria-label="Next">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -85,7 +87,7 @@ const projects = [
 </SectionAndTitle>
 
 <style>
-  .project-carousel-container {
+  .project-carousel-wrapper {
     width: 100%;
     overflow: hidden;
     padding: 2rem 0;
@@ -97,7 +99,7 @@ const projects = [
     gap: 2rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding: 2rem 50vw 2rem 2rem;
+    padding: 2rem calc(50vw - 40vw) 2rem calc(50vw - 40vw);
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -108,56 +110,87 @@ const projects = [
     display: none;
   }
 
-  .project-carousel-item {
+  @media (min-width: 768px) {
+    .project-carousel-track {
+      padding-left: calc(50vw - 250px);
+      padding-right: calc(50vw - 250px);
+    }
+  }
+
+  .project-card {
     flex: 0 0 80vw;
+    max-width: 500px;
     scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-card-bg);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition:
       transform 0.6s ease,
       opacity 0.6s ease;
-    transform: perspective(1200px) rotateY(45deg) scale(0.8);
+    transform: perspective(1200px) rotateY(25deg) scale(0.85);
     opacity: 0.6;
+    text-decoration: none;
+    color: inherit;
   }
 
-  .project-carousel-item.active {
+  .project-card.active {
     transform: perspective(1200px) rotateY(0deg) scale(1);
     opacity: 1;
   }
 
+  .project-card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+
   @media (min-width: 768px) {
-    .project-carousel-item {
+    .project-card {
       flex: 0 0 500px;
     }
-    .project-carousel-track {
-      padding-left: calc(50vw - 250px);
-    }
   }
 
-  /* Override card styles */
-  :global(.project-carousel-card) {
-    height: 100% !important;
-    border: none !important;
-    border-radius: 0 !important;
-    background: transparent !important;
+  .project-image {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
   }
-  :global(.project-carousel-card .card-image) {
-    height: 100% !important;
-    transition: transform 0.7s ease;
-  }
-  :global(.project-carousel-item:hover .card-image) {
+
+  .project-card:hover .project-image {
     transform: scale(1.05);
   }
-  :global(.project-carousel-card .card-body) {
-    display: none !important;
+
+  .project-content {
+    padding: 1.5rem;
+    background: var(--color-card-bg);
+    border-top: 1px solid var(--color-border);
   }
 
-  /* Navigation */
-  .carousel-nav {
+  .project-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: var(--color-text);
+  }
+
+  .project-description {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .project-nav {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
-  .nav-btn {
+
+  .project-nav-btn {
     background: var(--color-card-bg);
     border: 1px solid var(--color-border);
     color: var(--color-text);
@@ -171,41 +204,65 @@ const projects = [
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
-  .nav-btn:hover {
+
+  .project-nav-btn:hover {
     background: var(--primary);
     color: white;
     transform: scale(1.1);
     border-color: var(--primary);
   }
+
+  .project-nav-btn svg {
+    pointer-events: none;
+  }
 </style>
 
 <script>
-  const track = document.querySelector(".project-carousel-track");
-  const items = document.querySelectorAll(".project-carousel-item");
+  function initProjectCarousel() {
+    const track = document.getElementById("project-track");
+    const prevBtn = document.getElementById("project-prev");
+    const nextBtn = document.getElementById("project-next");
+    const cards = track?.querySelectorAll(".project-card");
 
-  const observerOptions = {
-    root: track,
-    rootMargin: "0px -45% 0px -45%",
-    threshold: 0,
-  };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        items.forEach((i) => i.classList.remove("active"));
-        entry.target.classList.add("active");
-      }
-    });
-  }, observerOptions);
-  items.forEach((item) => observer.observe(item));
+    if (!track || !prevBtn || !nextBtn || !cards) return;
 
-  const prevBtn = document.querySelector(".nav-btn.prev");
-  const nextBtn = document.querySelector(".nav-btn.next");
-  if (prevBtn && nextBtn && track) {
+    // Intersection Observer for active state
+    const observerOptions = {
+      root: track,
+      rootMargin: "0px -40% 0px -40%",
+      threshold: 0.5,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          cards.forEach((card) => card.classList.remove("active"));
+          entry.target.classList.add("active");
+        }
+      });
+    }, observerOptions);
+
+    cards.forEach((card) => observer.observe(card));
+
+    // Navigation buttons
     prevBtn.addEventListener("click", () => {
-      track.scrollBy({ left: -300, behavior: "smooth" });
+      const cardWidth = (cards[0] as HTMLElement).offsetWidth + 32; // card width + gap
+      track.scrollBy({ left: -cardWidth, behavior: "smooth" });
     });
+
     nextBtn.addEventListener("click", () => {
-      track.scrollBy({ left: 300, behavior: "smooth" });
+      const cardWidth = (cards[0] as HTMLElement).offsetWidth + 32; // card width + gap
+      track.scrollBy({ left: cardWidth, behavior: "smooth" });
     });
   }
+
+  // Initialize on load
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProjectCarousel);
+  } else {
+    initProjectCarousel();
+  }
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener("astro:page-load", initProjectCarousel);
 </script>
