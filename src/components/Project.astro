@@ -10,54 +10,202 @@ const projects = [
       "PROPUESTA DE MEJORA CONSTRUCTIVA CON LA METODOLOGÍA BIM, PARA VIVIENDAS UNIFAMILIARES DE LA CONSTRUCTORA COLBÚN SPA",
     slug: "project1",
   },
+  {
+    image: "/projects/project2.jpg",
+    title: "Proyecto 2",
+    description: "Descripción del proyecto 2, un caso de estudio interesante.",
+    slug: "project2",
+  },
+  {
+    image: "/projects/project3.jpg",
+    title: "Proyecto 3",
+    description: "Descripción del proyecto 3, otro ejemplo de trabajo.",
+    slug: "project3",
+  },
+  {
+    image: "/projects/project4.jpg",
+    title: "Proyecto 4",
+    description: "Descripción del proyecto 4, muestra adicional.",
+    slug: "project4",
+  },
+  {
+    image: "/projects/project5.jpg",
+    title: "Proyecto 5",
+    description: "Descripción del proyecto 5, última muestra.",
+    slug: "project5",
+  },
 ];
 ---
 
 <SectionAndTitle title="Projects">
-  <div class="projects-grid">
-    {
-      projects.map((p) => (
-        <ProjectRevitCard {...p} type="project" href={`/blog/${p.slug}`} />
-      ))
-    }
+  <div class="project-carousel-container">
+    <div class="project-carousel-track">
+      {
+        projects.map((p) => (
+          <div class="project-carousel-item">
+            <ProjectRevitCard
+              {...p}
+              type="project"
+              href={`/blog/${p.slug}`}
+              className="project-carousel-card"
+            />
+          </div>
+        ))
+      }
+    </div>
+    <div class="carousel-nav">
+      <button class="nav-btn prev" aria-label="Previous slide">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg
+        >
+      </button>
+      <button class="nav-btn next" aria-label="Next slide">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg
+        >
+      </button>
+    </div>
   </div>
 </SectionAndTitle>
 
 <style>
-  .projects {
-    padding: 4rem 1rem;
+  .project-carousel-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    perspective: 1200px;
   }
 
-  @media (min-width: 640px) {
-    .projects {
-      padding-top: 5rem;
-      padding-bottom: 5rem;
-    }
-  }
-
-  .projects-title {
-    margin-bottom: 2rem;
-    text-align: center;
-    font-size: 1.875rem;
-    font-weight: 700;
-    letter-spacing: -0.015em;
-  }
-
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+  .project-carousel-track {
+    display: flex;
     gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 2rem 50vw 2rem 2rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  @media (min-width: 640px) {
-    .projects-grid {
-      grid-template-columns: repeat(2, 1fr);
+  .project-carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-carousel-item {
+    flex: 0 0 80vw;
+    scroll-snap-align: center;
+    transition:
+      transform 0.6s ease,
+      opacity 0.6s ease;
+    transform: perspective(1200px) rotateY(45deg) scale(0.8);
+    opacity: 0.6;
+  }
+
+  .project-carousel-item.active {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) {
+    .project-carousel-item {
+      flex: 0 0 500px;
+    }
+    .project-carousel-track {
+      padding-left: calc(50vw - 250px);
     }
   }
 
-  @media (min-width: 1024px) {
-    .projects-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  /* Override card styles */
+  :global(.project-carousel-card) {
+    height: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+  :global(.project-carousel-card .card-image) {
+    height: 100% !important;
+    transition: transform 0.7s ease;
+  }
+  :global(.project-carousel-item:hover .card-image) {
+    transform: scale(1.05);
+  }
+  :global(.project-carousel-card .card-body) {
+    display: none !important;
+  }
+
+  /* Navigation */
+  .carousel-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .nav-btn {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .nav-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.1);
+    border-color: var(--primary);
   }
 </style>
+
+<script>
+  const track = document.querySelector(".project-carousel-track");
+  const items = document.querySelectorAll(".project-carousel-item");
+
+  const observerOptions = {
+    root: track,
+    rootMargin: "0px -45% 0px -45%",
+    threshold: 0,
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        items.forEach((i) => i.classList.remove("active"));
+        entry.target.classList.add("active");
+      }
+    });
+  }, observerOptions);
+  items.forEach((item) => observer.observe(item));
+
+  const prevBtn = document.querySelector(".nav-btn.prev");
+  const nextBtn = document.querySelector(".nav-btn.next");
+  if (prevBtn && nextBtn && track) {
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({ left: -300, behavior: "smooth" });
+    });
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({ left: 300, behavior: "smooth" });
+    });
+  }
+</script>

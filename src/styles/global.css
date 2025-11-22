@@ -1,0 +1,111 @@
+:root {
+  /* Base Palette */
+  --primary: #607afb;
+  --secondary: #a78bfa;
+  --bg-light: #f5f6f8;
+  --bg-dark: #0f1323;
+  --text-light: #e8e8e8;
+  --text-dark: #1a1a1a;
+
+  /* Semantic Variables (Default Light) */
+  --color-bg: var(--bg-light);
+  --color-text: var(--text-dark);
+  --color-text-muted: #4b5563;
+  --color-card-bg: #ffffff;
+  --color-border: rgba(0, 0, 0, 0.1);
+
+  --radius-default: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+}
+
+[data-theme="dark"] {
+  --color-bg: var(--bg-dark);
+  --color-text: var(--text-light);
+  --color-text-muted: #9ca3af;
+  --color-card-bg: #1e293b;
+  --color-border: rgba(255, 255, 255, 0.1);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Utility classes */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s forwards ease;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.8s forwards ease;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Component specific */
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-body);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sun-icon {
+  display: none;
+}
+
+.moon-icon {
+  display: block;
+}
+
+[data-theme="dark"] .sun-icon {
+  display: block;
+}
+
+[data-theme="dark"] .moon-icon {
+  display: none;
+}

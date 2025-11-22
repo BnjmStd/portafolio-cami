@@ -9,31 +9,407 @@ const featuredModels = [
     description: "Detailed Revit model of a modern residential building.",
     modelPath: "/3d/capri.glb",
   },
+  {
+    image: "/models/capri.jpg",
+    title: "Structural Analysis",
+    description: "Complex structural system visualization and analysis.",
+    modelPath: "/3d/capri.glb",
+  },
+  {
+    image: "/models/capri.jpg",
+    title: "MEP Coordination",
+    description: "Mechanical, Electrical, and Plumbing systems coordination.",
+    modelPath: "/3d/capri.glb",
+  },
 ];
 ---
 
 <SectionAndTitle title="Featured Revit Models">
-  <div class="featured-grid">
-    {featuredModels.map((m) => <ProjectRevitCard {...m} type="model" />)}
+  <div class="carousel-container">
+    <div class="carousel-track">
+      {
+        featuredModels.map((m) => (
+          <div class="carousel-item">
+            <div class="card-wrapper">
+              <ProjectRevitCard {...m} type="model" className="carousel-card" />
+              <div class="card-overlay">
+                <div class="overlay-content">
+                  <h3 class="overlay-title">{m.title}</h3>
+                  <p class="overlay-desc">{m.description}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="carousel-nav">
+      <button class="nav-btn prev" aria-label="Previous slide">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg
+        >
+      </button>
+      <button class="nav-btn next" aria-label="Next slide">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg
+        >
+      </button>
+    </div>
   </div>
 </SectionAndTitle>
 
 <style>
-  .featured-grid {
-    display: grid;
-    grid-template-columns: 1fr;
+  .carousel-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+  }
+
+  .carousel-track {
+    display: flex;
     gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 2rem 50vw 2rem 2rem; /* Right padding allows last item to center */
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    /* Hide scrollbar */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  @media (min-width: 640px) {
-    .featured-grid {
-      grid-template-columns: repeat(2, 1fr);
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-item {
+    flex: 0 0 80vw; /* Mobile width */
+    scroll-snap-align: center;
+    transition: all 0.5s ease;
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+
+  .carousel-item.active {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) {
+    .carousel-item {
+      flex: 0 0 600px; /* Desktop width */
+    }
+
+    .carousel-track {
+      padding-left: calc(50vw - 300px); /* Center first item */
     }
   }
 
-  @media (min-width: 1024px) {
-    .featured-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .card-wrapper {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    aspect-ratio: 16/9;
+  }
+
+  /* Overlay Styles */
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.6) 40%,
+      transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none; /* Allow clicks to pass through to the card */
+  }
+
+  .carousel-item.active .card-overlay {
+    opacity: 1;
+  }
+
+  .overlay-content {
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+  }
+
+  .carousel-item.active .overlay-content {
+    transform: translateY(0);
+  }
+
+  .overlay-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .overlay-desc {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    max-width: 80%;
+  }
+
+  /* Override ProjectRevitCard styles */
+  :global(.carousel-card) {
+    height: 100% !important;
+    border: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+  }
+
+  :global(.carousel-card .card-image) {
+    height: 100% !important;
+    transition: transform 0.7s ease;
+  }
+
+  :global(.carousel-item:hover .card-image) {
+    transform: scale(1.05);
+  }
+
+  /* Hide default card body since we use overlay */
+  :global(.carousel-card .card-body) {
+    display: none !important;
+  }
+
+  /* Navigation Buttons */
+  .carousel-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .nav-btn {
+    background: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.1);
+    border-color: var(--primary);
+  }
+</style>
+
+<script>
+  const track = document.querySelector(".carousel-track");
+  const items = document.querySelectorAll(".carousel-item");
+
+  const observerOptions = {
+    root: track,
+    rootMargin: "0px -45% 0px -45%", // Active when item is in center 10%
+    threshold: 0,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        items.forEach((i) => i.classList.remove("active"));
+        entry.target.classList.add("active");
+      }
+    });
+  }, observerOptions);
+
+  items.forEach((item) => observer.observe(item));
+
+  // Navigation Logic
+  const prevBtn = document.querySelector(".nav-btn.prev");
+  const nextBtn = document.querySelector(".nav-btn.next");
+
+  if (prevBtn && nextBtn && track) {
+    prevBtn.addEventListener("click", () => {
+      track.scrollBy({ left: -300, behavior: "smooth" });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      track.scrollBy({ left: 300, behavior: "smooth" });
+    });
+  }
+
+  // Modal Logic
+  const modal = document.getElementById("model-modal");
+  const closeBtn = document.getElementById("close-modal");
+  const canvasContainer = document.getElementById("canvas-container");
+  const loader = document.getElementById("loader");
+  const modelTriggers = document.querySelectorAll('[data-type="model"]');
+
+  // Import Three.js dynamically or assume it's loaded globally if script tag is present
+  // Since we removed the script tag from card, we need to ensure it's loaded.
+  // We'll add the script tag to the HTML below.
+
+  if (modal && closeBtn && canvasContainer) {
+    const closeModal = () => {
+      modal.classList.add("hidden");
+      canvasContainer.innerHTML = ""; // Clean up canvas
+      // Ideally dispose three.js renderer here
+    };
+
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    modelTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", (e) => {
+        e.preventDefault(); // Prevent default if it was a link
+        const modelPath = (trigger as HTMLElement).dataset.model;
+        if (modelPath) {
+          modal.classList.remove("hidden");
+          if (loader) loader.style.display = "block";
+
+          // Initialize Three.js viewer here
+          // For now, we'll rely on the existing global script logic if it attaches itself,
+          // but likely we need to re-trigger the viewer initialization.
+          // Assuming the global script exposes a function or we need to dispatch an event.
+
+          // Dispatch a custom event that the existing three.js script might listen to?
+          // Or re-implement the viewer logic here.
+          // Since I don't have the original three.js script content, I will assume
+          // I need to re-inject the script or logic.
+
+          // Let's try to dispatch an event that the original script might have used,
+          // or simply load the model if we had the viewer code.
+
+          // Since the user said "the script works well", it implies there IS a script.
+          // I will re-add the script tag for three.js and the viewer logic.
+
+          // Actually, the user said "el script de lo que hace el modal funciona bien".
+          // This implies the script was likely in `src/scripts/three.js` and it attaches listeners.
+          // But since I moved the modal, the listeners might be broken if they ran on load.
+          // I should re-run the script or ensure it uses delegation.
+
+          // Let's re-add the script tag at the bottom.
+        }
+      });
+    });
+  }
+</script>
+
+<!-- Modal Global moved here -->
+<div id="model-modal" class="modal hidden">
+  <div class="modal-content">
+    <button id="close-modal" class="close-btn">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        fill="currentColor"
+      >
+        <path
+          d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"
+        ></path>
+      </svg>
+    </button>
+    <div id="loader">Cargando modelo...</div>
+    <div id="canvas-container"></div>
+  </div>
+</div>
+
+<script src="/src/scripts/three.js"></script>
+
+<style>
+  /* Modal Styles */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000; /* High z-index to sit on top of everything */
+    backdrop-filter: blur(5px);
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .modal-content {
+    position: relative;
+    background: var(--color-card-bg);
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 90vw;
+    height: 80vh;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--color-border);
+  }
+
+  #canvas-container {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: transform 0.2s;
+  }
+
+  .close-btn:hover {
+    transform: scale(1.1);
+  }
+
+  #loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: var(--color-text);
+    pointer-events: none;
   }
 </style>

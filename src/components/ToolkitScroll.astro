@@ -1,0 +1,267 @@
+---
+import SectionAndTitle from "./SectionAndTitle.astro";
+import Power1 from "~/icons/Power1.astro";
+import Power2 from "~/icons/Power2.astro";
+import Power3 from "~/icons/Power3.astro";
+import Power4 from "~/icons/Power4.astro";
+
+const TOOLKIT = [
+    {
+        id: "tool-1",
+        name: "Revit",
+        icon: Power1,
+        description:
+            "Modelado BIM avanzado para arquitectura y estructuras. Creación de familias paramétricas, gestión de fases de proyecto y documentación constructiva detallada.",
+    },
+    {
+        id: "tool-2",
+        name: "AutoCAD",
+        icon: Power2,
+        description:
+            "Dibujo técnico 2D de alta precisión. Elaboración de planos de detalles, esquemas de ingeniería y documentación técnica estandarizada para proyectos civiles.",
+    },
+    {
+        id: "tool-3",
+        name: "Civil 3D",
+        icon: Power3,
+        description:
+            "Diseño y documentación de ingeniería civil. Modelado de terrenos, explanaciones, obras lineales y cálculo de movimiento de tierras.",
+    },
+    {
+        id: "tool-4",
+        name: "BIM 360",
+        icon: Power4,
+        description:
+            "Gestión colaborativa de proyectos en la nube. Coordinación de modelos, detección de interferencias y control de versiones para equipos multidisciplinarios.",
+    },
+];
+---
+
+<SectionAndTitle title="Professional Toolkit">
+    <div class="scroll-container">
+        <!-- Sticky Side (Left) -->
+        <div class="sticky-wrapper">
+            <div class="sticky-card">
+                <div class="card-content">
+                    <div class="icon-wrapper" id="sticky-icon-container">
+                        <div id="icon-tool-1" class="sticky-icon active">
+                            <Power1 />
+                        </div>
+                        <div id="icon-tool-2" class="sticky-icon">
+                            <Power2 />
+                        </div>
+                        <div id="icon-tool-3" class="sticky-icon">
+                            <Power3 />
+                        </div>
+                        <div id="icon-tool-4" class="sticky-icon">
+                            <Power4 />
+                        </div>
+                    </div>
+                    <h3 class="tool-name" id="sticky-name">
+                        {TOOLKIT[0].name}
+                    </h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrollable Side (Right) -->
+        <div class="scroll-content">
+            {
+                TOOLKIT.map((tool) => (
+                    <div
+                        class="scroll-item"
+                        data-id={tool.id}
+                        data-name={tool.name}
+                    >
+                        <p class="tool-description">{tool.description}</p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</SectionAndTitle>
+
+<script>
+    const items = document.querySelectorAll(".scroll-item");
+    const stickyName = document.getElementById("sticky-name");
+    const stickyIcons = document.querySelectorAll(".sticky-icon");
+
+    const observerOptions = {
+        root: null,
+        rootMargin: "-40% 0px -40% 0px",
+        threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const target = entry.target as HTMLElement;
+                const { id, name } = target.dataset;
+
+                // Update Name
+                if (stickyName) stickyName.textContent = name || "";
+
+                // Update Icon visibility
+                stickyIcons.forEach((icon) => {
+                    icon.classList.remove("active");
+                    if (icon.id === `icon-${id}`) {
+                        icon.classList.add("active");
+                    }
+                });
+
+                // Highlight active item
+                items.forEach((i) => i.classList.remove("active"));
+                entry.target.classList.add("active");
+            }
+        });
+    }, observerOptions);
+
+    items.forEach((item) => observer.observe(item));
+</script>
+
+<style>
+    .scroll-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    /* Desktop Layout */
+    @media (min-width: 768px) {
+        .scroll-container {
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .sticky-wrapper {
+            position: relative;
+        }
+
+        .sticky-card {
+            position: sticky;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 3rem;
+            background: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px var(--color-border);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
+    /* Mobile Layout */
+    @media (max-width: 767px) {
+        .sticky-wrapper {
+            position: sticky;
+            top: 1rem;
+            z-index: 10;
+            margin-bottom: 2rem;
+        }
+
+        .sticky-card {
+            background: var(--color-card-bg);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    /* Icons */
+    .icon-wrapper {
+        position: relative;
+        width: 5rem;
+        height: 5rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media (max-width: 767px) {
+        .icon-wrapper {
+            width: 3rem;
+            height: 3rem;
+            margin-bottom: 0;
+        }
+    }
+
+    .sticky-icon {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        color: var(--primary);
+    }
+
+    .sticky-icon.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .sticky-icon :global(svg) {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Typography */
+    .tool-name {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-text);
+        margin: 0;
+    }
+
+    @media (max-width: 767px) {
+        .tool-name {
+            font-size: 1.5rem;
+        }
+    }
+
+    /* Scroll Items */
+    .scroll-content {
+        display: flex;
+        flex-direction: column;
+        gap: 50vh;
+        padding-bottom: 20vh;
+        padding-top: 10vh;
+    }
+
+    .scroll-item {
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        border: 1px solid transparent;
+        transition: all 0.5s ease;
+        opacity: 0.3;
+        filter: blur(2px);
+    }
+
+    .scroll-item.active {
+        opacity: 1;
+        filter: blur(0);
+        background: var(--color-card-bg);
+        border-color: var(--color-border);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .tool-description {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        color: var(--color-text-muted);
+        margin: 0;
+    }
+</style>

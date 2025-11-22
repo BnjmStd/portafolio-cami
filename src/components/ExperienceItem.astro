@@ -64,11 +64,7 @@ const { title, company, description, link, date } = Astro.props;
     left: -35px;
     top: 0;
     height: 100%;
-    border-left: 2px solid rgba(0, 0, 0, 0.2);
-  }
-
-  :global(.dark) .timeline-item::before {
-    border-color: rgba(255, 255, 255, 0.15);
+    border-left: 2px solid var(--color-border);
   }
 
   /* === Left Column === */
@@ -87,7 +83,7 @@ const { title, company, description, link, date } = Astro.props;
     position: absolute;
     left: -42px;
     font-size: 2.5rem;
-    color: var(--primary); 
+    color: var(--primary);
     border-radius: 50%;
   }
 
@@ -101,22 +97,14 @@ const { title, company, description, link, date } = Astro.props;
   .timeline-company {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #4b5563; 
-  }
-
-  :global(.dark) .timeline-company {
-    color: #fff;
+    color: var(--color-text);
   }
 
   .timeline-date {
     margin: 0;
     padding: 0;
     font-size: 0.875rem;
-    color: rgba(75, 85, 99, 0.8);
-  }
-
-  :global(.dark) .timeline-date {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--color-text-muted);
   }
 
   /* === Right Column === */
@@ -125,11 +113,7 @@ const { title, company, description, link, date } = Astro.props;
     flex-direction: column;
     gap: 0.5rem;
     padding-bottom: 1rem;
-    color: #4b5563;
-  }
-
-  :global(.dark) .timeline-body {
-    color: #d1d5db;
+    color: var(--color-text-muted);
   }
 
   /* SVG Icon */

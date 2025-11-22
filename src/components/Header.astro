@@ -25,18 +25,13 @@ const name = "Camila Aracena";
 </header>
 
 <style>
-  :root {
-    --color-bg: #fff;
-    --color-text: #0f1016;
-    --color-accent: #006aff;
-  }
-
   .header {
     position: sticky;
     top: 0;
     z-index: 1000;
     background: var(--color-bg);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px var(--color-border);
+    transition: background-color 0.3s ease;
   }
 
   .header svg {
@@ -92,7 +87,7 @@ const name = "Camila Aracena";
       justify-content: center;
       align-items: center;
       background: var(--color-bg);
-      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.15);
+      box-shadow: -5px 0 15px var(--color-border);
       transition: right 0.2s ease-in-out;
       gap: 2rem;
     }

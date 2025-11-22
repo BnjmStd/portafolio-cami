@@ -1,30 +1,60 @@
-<div class="background">
-  <div class="background-overlay"></div>
+<div class="background-container">
+  <div class="background-light">
+    <div class="background-overlay"></div>
+  </div>
+  <div class="background-dark"></div>
 </div>
 
 <style>
-  .background {
+  .background-container {
     position: fixed;
     inset: 0;
     z-index: -10;
     height: 100%;
     width: 100%;
+    pointer-events: none;
+  }
+
+  /* Light Mode Background */
+  .background-light {
+    position: absolute;
+    inset: 0;
     background-color: #ffffff;
     background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px),
       linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
     background-size: 6rem 4rem;
+    display: block;
   }
 
   .background-overlay {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     background-image: radial-gradient(
       circle 800px at 100% 200px,
       #d5c5ff,
       transparent
     );
+  }
+
+  /* Dark Mode Background */
+  .background-dark {
+    position: absolute;
+    inset: 0;
+    background-color: #0a0a0a; /* neutral-950 */
+    background-image: radial-gradient(
+      ellipse 80% 80% at 50% -20%,
+      rgba(120, 119, 198, 0.3),
+      rgba(255, 255, 255, 0)
+    );
+    display: none;
+  }
+
+  /* Theme Switching Logic */
+  :global([data-theme="dark"]) .background-light {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .background-dark {
+    display: block;
   }
 </style>

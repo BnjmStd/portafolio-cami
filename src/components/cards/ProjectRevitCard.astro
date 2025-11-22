@@ -51,39 +51,13 @@ const {
   )
 }
 
-<!-- Modal Global (solo se renderiza una vez) -->
-<div id="model-modal" class="modal hidden">
-  <div class="modal-content">
-    <button id="close-modal" class="close-btn"
-      ><svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-        fill="currentColor"
-        ><path
-          d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z"
-        ></path></svg
-      ></button
-    >
-    <div id="loader">Cargando modelo...</div>
-    <div id="canvas-container"></div>
-  </div>
-</div>
-
-<script src="../../scripts/three.js"></script>
-
 <style>
-  svg {
-    fill: white;
-  }
-
   .card {
     display: block;
     overflow: hidden;
     border-radius: 0.5rem;
-    background-color: var(--background-light, #ffffff);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-card-bg);
+    box-shadow: 0 1px 3px var(--color-border);
     transition:
       box-shadow 0.3s ease-in-out,
       transform 0.1s ease-in-out;
@@ -97,10 +71,6 @@ const {
   .card:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
-  }
-
-  :global(.dark) .card {
-    background-color: var(--background-dark, #0f172a);
   }
 
   .card-image {
@@ -119,62 +89,13 @@ const {
     font-weight: 700;
     margin: 0;
     text-decoration: none;
+    color: var(--color-text);
   }
 
   .card-text {
     margin-top: 0.5rem;
     font-size: 0.875rem;
-    color: rgb(71, 85, 105);
+    color: var(--color-text-muted);
     text-decoration: none;
-  }
-
-  :global(.dark) .card-text {
-    color: rgb(148, 163, 184);
-  }
-
-  /* Modal */
-  .modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-  .hidden {
-    display: none;
-  }
-
-  .modal-content {
-    position: relative;
-    background: white;
-    padding: 1rem;
-    border-radius: 8px;
-    max-width: 90vw;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  #canvas-container {
-    width: 80vw;
-    height: 70vh;
-  }
-
-  .close-btn {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-  }
-
-  #loader {
-    text-align: center;
-    margin-top: 3rem;
-    font-weight: bold;
   }
 </style>

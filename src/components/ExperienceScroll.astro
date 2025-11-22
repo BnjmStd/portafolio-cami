@@ -1,0 +1,218 @@
+---
+import SectionAndTitle from "./SectionAndTitle.astro";
+
+const EXPERIENCE = [
+    {
+        id: "exp-1",
+        date: "Abr 2024 – Ago 2024",
+        title: "Pasatratos",
+        company: "Constructora Colbún Talca",
+        description:
+            "Control de personal y elaboración de estados de pago para los contratistas. Supervisión y revisión diaria de avances en la obra. Elaboración de informes y reportes de gestión.",
+    },
+    {
+        id: "exp-2",
+        date: "Mar 2024 – Abr 2024",
+        title: "Ayudante de Trazador",
+        company: "Constructora Colbún Talca",
+        description:
+            "Apoyo en nivelación de terrenos, trazado de ejes y líneas guías. Preparación de superficies, cubicación y marcado de cotas. Revisión y ubicación de elementos estructurales.",
+    },
+    {
+        id: "exp-3",
+        date: "Ene 2024 – Feb 2024",
+        title: "Práctica Profesional",
+        company: "Constructora Colbún Talca",
+        description:
+            "Apoyo en la revisión de PAC (plan de actividades semanales) y fichaje técnico de viviendas. Control y entrega de vales de consumo. Recepción de camiones y cubicación de materiales. Nivelación de terrenos y apoyo en supervisión de obra.",
+    },
+];
+---
+
+<SectionAndTitle title="Experiencia">
+    <div class="scroll-container">
+        <!-- Sticky Side (Left) -->
+        <div class="sticky-wrapper">
+            <div class="sticky-card">
+                <div class="card-content">
+                    <span class="exp-date" id="sticky-date"
+                        >{EXPERIENCE[0].date}</span
+                    >
+                    <h3 class="exp-title" id="sticky-title">
+                        {EXPERIENCE[0].title}
+                    </h3>
+                    <h4 class="exp-company" id="sticky-company">
+                        {EXPERIENCE[0].company}
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scrollable Side (Right) -->
+        <div class="scroll-content">
+            {
+                EXPERIENCE.map((exp) => (
+                    <div
+                        class="scroll-item"
+                        data-id={exp.id}
+                        data-date={exp.date}
+                        data-title={exp.title}
+                        data-company={exp.company}
+                    >
+                        <p class="exp-description">{exp.description}</p>
+                    </div>
+                ))
+            }
+        </div>
+    </div>
+</SectionAndTitle>
+
+<script>
+    const items = document.querySelectorAll(".scroll-item");
+    const stickyDate = document.getElementById("sticky-date");
+    const stickyTitle = document.getElementById("sticky-title");
+    const stickyCompany = document.getElementById("sticky-company");
+
+    const observerOptions = {
+        root: null,
+        rootMargin: "-40% 0px -40% 0px", // Active when item is in the middle 20% of screen
+        threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const target = entry.target as HTMLElement;
+                const { date, title, company } = target.dataset;
+
+                // Update content with a quick fade effect could be added here,
+                // but simple text replacement is instant and clean.
+                if (stickyDate) stickyDate.textContent = date || "";
+                if (stickyTitle) stickyTitle.textContent = title || "";
+                if (stickyCompany) stickyCompany.textContent = company || "";
+
+                // Highlight active item
+                items.forEach((i) => i.classList.remove("active"));
+                entry.target.classList.add("active");
+            }
+        });
+    }, observerOptions);
+
+    items.forEach((item) => observer.observe(item));
+</script>
+
+<style>
+    .scroll-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    /* Desktop Layout */
+    @media (min-width: 768px) {
+        .scroll-container {
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .sticky-wrapper {
+            position: relative;
+        }
+
+        .sticky-card {
+            position: sticky;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 2rem;
+            background: var(--color-card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px var(--color-border);
+            transition: all 0.3s ease;
+        }
+    }
+
+    /* Mobile Layout */
+    @media (max-width: 767px) {
+        .sticky-wrapper {
+            display: none; /* Hide sticky card on mobile, show standard list instead? */
+            /* For this implementation, let's keep it simple: 
+         On mobile, we might want to just show the list items fully.
+         But to mimic the requested effect, we'll just stack them.
+      */
+        }
+
+        /* Re-enable sticky wrapper for mobile but static */
+        .sticky-wrapper {
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .sticky-card {
+            background: var(--color-card-bg);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--color-border);
+        }
+    }
+
+    /* Typography */
+    .exp-date {
+        font-size: 0.875rem;
+        color: var(--primary);
+        font-weight: 600;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .exp-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-text);
+        margin-bottom: 0.25rem;
+        line-height: 1.2;
+    }
+
+    .exp-company {
+        font-size: 1.125rem;
+        color: var(--color-text-muted);
+        font-weight: 500;
+    }
+
+    /* Scroll Items */
+    .scroll-content {
+        display: flex;
+        flex-direction: column;
+        gap: 40vh; /* Large gap to force scrolling */
+        padding-bottom: 20vh;
+        padding-top: 10vh;
+    }
+
+    .scroll-item {
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        border: 1px solid transparent;
+        transition: all 0.5s ease;
+        opacity: 0.3;
+        filter: blur(2px);
+    }
+
+    .scroll-item.active {
+        opacity: 1;
+        filter: blur(0);
+        background: var(--color-card-bg);
+        border-color: var(--color-border);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .exp-description {
+        font-size: 1.125rem;
+        line-height: 1.6;
+        color: var(--color-text-muted);
+    }
+</style>
