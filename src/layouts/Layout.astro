@@ -69,16 +69,25 @@ const websiteImage = "http://camila-aracena.cl/images/home/menu-2.jpg";
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 100px;
+    }
   }
 
   .featured {
     padding: 4rem 1rem;
+    scroll-margin-top: 80px;
   }
 
   @media (min-width: 640px) {
     .featured {
       padding-top: 5rem;
       padding-bottom: 5rem;
+      scroll-margin-top: 100px;
     }
   }
 

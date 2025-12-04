@@ -75,7 +75,13 @@ const { title, company, description, link, date } = Astro.props;
 
   .timeline-header-content {
     position: sticky;
-    top: 0;
+    top: 80px;
+  }
+
+  @media (min-width: 768px) {
+    .timeline-header-content {
+      top: 100px;
+    }
   }
 
   /* Bullet */

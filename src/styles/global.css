@@ -76,36 +76,3 @@ html {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
-
-.theme-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius-full);
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  font-family: var(--font-body);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sun-icon {
-  display: none;
-}
-
-.moon-icon {
-  display: block;
-}
-
-[data-theme="dark"] .sun-icon {
-  display: block;
-}
-
-[data-theme="dark"] .moon-icon {
-  display: none;
-}

@@ -33,7 +33,13 @@ const toolkit = [
   .toolkit-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .toolkit-grid {
+      gap: 1.5rem;
+    }
   }
 
   @media (min-width: 768px) {
@@ -43,20 +49,35 @@ const toolkit = [
   }
 
   .toolkit-icon {
-    width: 4rem;
-    height: 4rem;
-    margin-bottom: 1rem;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.75rem;
     color: rgba(59, 130, 246, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
+  @media (min-width: 640px) {
+    .toolkit-icon {
+      width: 4rem;
+      height: 4rem;
+      margin-bottom: 1rem;
+    }
+  }
+
   .toolkit-text {
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 700;
     color: rgb(30, 41, 59);
     margin: 0;
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .toolkit-text {
+      font-size: 1.125rem;
+    }
   }
 
   :global(.dark) .toolkit-text {
