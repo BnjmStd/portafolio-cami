@@ -20,36 +20,13 @@ const {
 } = Astro.props;
 ---
 
-{
-  type === "project" ? (
-    <a
-      href={href}
-      class={`card ${className}`}
-      data-type={type}
-      data-title={title}
-    >
-      <div class="card-image" style={`background-image: url(${image});`} />
-      <div class="card-body">
-        <h3 class="card-title">{title}</h3>
-        <p class="card-text">{description}</p>
-      </div>
-    </a>
-  ) : (
-    <div
-      class={`card ${className}`}
-      data-type={type}
-      data-title={title}
-      data-model={modelPath}
-      role="button"
-    >
-      <div class="card-image" style={`background-image: url(${image});`} />
-      <div class="card-body">
-        <h3 class="card-title">{title}</h3>
-        <p class="card-text">{description}</p>
-      </div>
-    </div>
-  )
-}
+<div class={`card ${className}`} data-type={type} data-title={title} data-model={modelPath} role="button">
+  <div class="card-image" style={`background-image: url(${image});`} />
+  <div class="card-body">
+    <h3 class="card-title">{title}</h3>
+    <p class="card-text">{description}</p>
+  </div>
+</div>
 
 <style>
   .card {

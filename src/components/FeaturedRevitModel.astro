@@ -1,27 +1,9 @@
 ---
 import ProjectRevitCard from "./cards/ProjectRevitCard.astro";
 import SectionAndTitle from "./SectionAndTitle.astro";
+import { readModels } from "~/utils/data";
 
-const featuredModels = [
-  {
-    image: "/imagenes/capri_real.png",
-    title: "Capri Building Model",
-    description: "Detailed Revit model of a modern residential building.",
-    modelPath: "/3d/capri.glb",
-  },
-  {
-    image: "/imagenes/viena_real.png",
-    title: "Viena Real Building Model",
-    description: "Detailed Revit model of a modern residential building.",
-    modelPath: "/3d/viene.glb",
-  },
-  {
-    image: "/imagenes/genova_real.png",
-    title: "Genova Building Model",
-    description: "Detailed Revit model of a modern residential building.",
-    modelPath: "/3d/genova.glb",
-  },
-];
+const featuredModels = readModels();
 ---
 
 <SectionAndTitle title="Featured Revit Models">

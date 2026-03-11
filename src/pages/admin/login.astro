@@ -1,0 +1,80 @@
+---
+export const prerender = false;
+import { verifyPassword, createAuthToken } from "../../utils/auth";
+
+let error = "";
+
+if (Astro.request.method === "POST") {
+  const form = await Astro.request.formData();
+  const password = form.get("password") as string;
+
+  if (verifyPassword(password)) {
+    Astro.cookies.set("_admin_token", createAuthToken(), {
+      httpOnly: true,
+      secure: import.meta.env.PROD,
+      sameSite: "strict",
+      path: "/",
+      maxAge: 60 * 60 * 24,
+    });
+    return Astro.redirect("/admin");
+  } else {
+    error = "Contraseña incorrecta.";
+  }
+}
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin — Iniciar sesión</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #f1f5f9;
+        display: flex; align-items: center; justify-content: center;
+        min-height: 100vh;
+      }
+      .card {
+        background: white; border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+        padding: 2.25rem; width: 100%; max-width: 380px;
+      }
+      .logo { font-size: 2rem; margin-bottom: 0.5rem; }
+      h1 { font-size: 1.4rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem; }
+      .subtitle { font-size: 0.875rem; color: #64748b; margin-bottom: 1.75rem; }
+      label { display: block; font-size: 0.875rem; font-weight: 500; color: #374151; margin-bottom: 0.35rem; }
+      input {
+        width: 100%; padding: 0.65rem 0.9rem;
+        border: 1px solid #d1d5db; border-radius: 7px;
+        font-size: 1rem; margin-bottom: 1.1rem;
+        transition: border-color 0.15s;
+      }
+      input:focus { outline: none; border-color: #607afb; box-shadow: 0 0 0 3px rgba(96,122,251,0.15); }
+      button {
+        width: 100%; padding: 0.7rem;
+        background: #607afb; color: white;
+        border: none; border-radius: 7px;
+        font-size: 1rem; font-weight: 600; cursor: pointer;
+        transition: background 0.15s;
+      }
+      button:hover { background: #4a64e5; }
+      .error { color: #dc2626; font-size: 0.875rem; margin-bottom: 1rem; padding: 0.65rem 0.9rem; background: #fef2f2; border-radius: 6px; border: 1px solid #fecaca; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="logo">⚙</div>
+      <h1>Panel de administración</h1>
+      <p class="subtitle">Ingresa tu contraseña para continuar</p>
+      {error && <p class="error">{error}</p>}
+      <form method="POST">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password" required autofocus autocomplete="current-password" />
+        <button type="submit">Entrar</button>
+      </form>
+    </div>
+  </body>
+</html>

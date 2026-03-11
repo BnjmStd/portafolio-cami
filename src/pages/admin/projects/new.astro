@@ -1,0 +1,66 @@
+---
+export const prerender = false;
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import { readProjects, writeProjects } from "../../../utils/data";
+import { randomUUID } from "node:crypto";
+
+let error = "";
+let success = "";
+
+if (Astro.request.method === "POST") {
+  const form = await Astro.request.formData();
+  const title = (form.get("title") as string)?.trim();
+  const description = (form.get("description") as string)?.trim();
+  const image = (form.get("image") as string)?.trim();
+  const slug = (form.get("slug") as string)?.trim();
+
+  if (!title || !description || !image || !slug) {
+    error = "Todos los campos son obligatorios.";
+  } else if (!/^[a-z0-9-]+$/.test(slug)) {
+    error = "El slug solo puede contener letras minúsculas, números y guiones.";
+  } else {
+    const projects = readProjects();
+    if (projects.find((p) => p.slug === slug)) {
+      error = "Ya existe un proyecto con ese slug.";
+    } else {
+      projects.push({ id: randomUUID(), image, title, description, slug });
+      writeProjects(projects);
+      return Astro.redirect("/admin?created=project");
+    }
+  }
+}
+---
+
+<AdminLayout title="Nuevo proyecto">
+  <div class="page-header">
+    <h1 class="page-title">Nuevo proyecto</h1>
+    <a href="/admin" class="btn btn-secondary">← Volver</a>
+  </div>
+  <div class="card">
+    {error && <p class="error" style="margin-bottom:1.25rem">{error}</p>}
+    <form method="POST" class="form-grid">
+      <div>
+        <label for="title">Título *</label>
+        <input type="text" id="title" name="title" required />
+      </div>
+      <div>
+        <label for="slug">Slug (URL) *</label>
+        <input type="text" id="slug" name="slug" required pattern="[a-z0-9-]+" />
+        <p class="hint">Solo letras minúsculas, números y guiones. Ej: <code>mi-proyecto</code>. Se usa en <code>/blog/[slug]</code></p>
+      </div>
+      <div>
+        <label for="image">Ruta de imagen *</label>
+        <input type="text" id="image" name="image" required placeholder="/projects/mi-proyecto.jpg" />
+        <p class="hint">Ruta relativa al directorio <code>public/</code></p>
+      </div>
+      <div>
+        <label for="description">Descripción *</label>
+        <textarea id="description" name="description" required></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Crear proyecto</button>
+        <a href="/admin" class="btn btn-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</AdminLayout>

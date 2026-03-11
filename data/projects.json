@@ -1,0 +1,37 @@
+[
+  {
+    "id": "project1",
+    "image": "/projects/tesis_cami.jpg",
+    "title": "Memoria de título",
+    "description": "PROPUESTA DE MEJORA CONSTRUCTIVA CON LA METODOLOGÍA BIM, PARA VIVIENDAS UNIFAMILIARES DE LA CONSTRUCTORA COLBÚN SPA",
+    "slug": "project1"
+  },
+  {
+    "id": "project2",
+    "image": "/projects/project2.jpg",
+    "title": "Proyecto 2",
+    "description": "Descripción del proyecto 2, un caso de estudio interesante.",
+    "slug": "project2"
+  },
+  {
+    "id": "project3",
+    "image": "/projects/project3.jpg",
+    "title": "Proyecto 3",
+    "description": "Descripción del proyecto 3, otro ejemplo de trabajo.",
+    "slug": "project3"
+  },
+  {
+    "id": "project4",
+    "image": "/projects/project4.jpg",
+    "title": "Proyecto 4",
+    "description": "Descripción del proyecto 4, muestra adicional.",
+    "slug": "project4"
+  },
+  {
+    "id": "project5",
+    "image": "/projects/project5.jpg",
+    "title": "Proyecto 5",
+    "description": "Descripción del proyecto 5, última muestra.",
+    "slug": "project5"
+  }
+]

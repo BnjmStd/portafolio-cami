@@ -1,0 +1,78 @@
+---
+export const prerender = false;
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import { readProjects, readModels } from "../../utils/data";
+
+const projects = readProjects();
+const models = readModels();
+---
+
+<AdminLayout title="Dashboard">
+  <div class="section-gap">
+    <div class="page-header">
+      <h1 class="page-title">Proyectos</h1>
+      <a href="/admin/projects/new" class="btn btn-primary">+ Nuevo proyecto</a>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Título</th>
+          <th>Slug</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {projects.map((p) => (
+          <tr>
+            <td><img class="thumb" src={p.image} alt={p.title} loading="lazy" /></td>
+            <td>{p.title}</td>
+            <td><code>{p.slug}</code></td>
+            <td>
+              <div class="td-actions">
+                <a href={`/admin/projects/${p.id}/edit`} class="btn btn-secondary btn-sm">Editar</a>
+              </div>
+            </td>
+          </tr>
+        ))}
+        {projects.length === 0 && (
+          <tr><td colspan="4" style="color:#94a3b8;text-align:center">Sin proyectos aún</td></tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <div class="page-header">
+      <h1 class="page-title">Modelos Revit</h1>
+      <a href="/admin/models/new" class="btn btn-primary">+ Nuevo modelo</a>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Título</th>
+          <th>Archivo GLB</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {models.map((m) => (
+          <tr>
+            <td><img class="thumb" src={m.image} alt={m.title} loading="lazy" /></td>
+            <td>{m.title}</td>
+            <td><code style="font-size:0.8rem">{m.modelPath}</code></td>
+            <td>
+              <div class="td-actions">
+                <a href={`/admin/models/${m.id}/edit`} class="btn btn-secondary btn-sm">Editar</a>
+              </div>
+            </td>
+          </tr>
+        ))}
+        {models.length === 0 && (
+          <tr><td colspan="4" style="color:#94a3b8;text-align:center">Sin modelos aún</td></tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</AdminLayout>
